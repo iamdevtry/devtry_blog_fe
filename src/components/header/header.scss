@@ -7,6 +7,9 @@
     left: 0;
     background-color: $white;
     padding: 0 2rem;
+    z-index: 999;
+    box-shadow: $box-shadow;
+
     &__wrap {
         @include flex(center, space-between);
         height: 100%;

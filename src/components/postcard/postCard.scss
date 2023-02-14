@@ -1,0 +1,87 @@
+@use '../../scss/' as *;
+
+.post-card {
+    padding: 30px;
+    background-color: $white;
+    box-shadow: $box-shadow;
+    border-radius: 4px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    &__image {
+        padding: 0 15px;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    &__content {
+        line-height: 26px;
+        padding: 0 15px;
+    }
+    &__title {
+        font-size: $font-size-xl;
+        font-weight: 600;
+        color: $main-color;
+        margin-bottom: 12px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__description {
+        font-size: $font-size-m;
+        color: $text-color;
+    }
+
+    &__more {
+        font-size: $font-size-s;
+        color: $main-color;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__tags {
+        padding: 5px 10px;
+        // border-radius: 4px;
+        @include flex(center, space-between);
+    }
+
+    &__tag {
+        font-size: $font-size-s;
+        color: $main-color;
+        font-weight: 600;
+        margin-right: 10px;
+        background-color: aliceblue;
+        padding: 5px 10px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+
+    &__actions {
+        padding: 5px 10px;
+        // border-radius: 4px;
+        @include flex(center, space-between);
+    }
+
+    &__comment,
+    &__like {
+        font-size: $font-size-s;
+        color: $main-color;
+        font-weight: 600;
+        margin-right: 10px;
+        background-color: aliceblue;
+        padding: 5px 10px;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}

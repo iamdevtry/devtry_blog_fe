@@ -46,12 +46,6 @@ const Header = () => {
         subMenu.classList.toggle('show');
     };
 
-    //remove submenu when click outside
-    // window.addEventListener('click', (e) => {
-    //     const subMenu = document.querySelector('.header__left-menu--submenu');
-    //     console.log(e.target === subMenu);
-    // });
-
     return (
         <div className="header">
             <div className="header__wrap container_fluid">
@@ -64,7 +58,10 @@ const Header = () => {
                     <div className="header__left-menu">
                         {headerNav.map((item, index) => (
                             <li key={index} className={`${index === active ? 'active' : ''}`}>
-                                <Link to={item.path}>
+                                <Link
+                                    to={item.path}
+                                    style={{ alignItems: 'center', display: 'flex' }}
+                                >
                                     {item.display}
                                     {item.chilldren && (
                                         <FaChevronDown
