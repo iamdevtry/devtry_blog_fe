@@ -1,0 +1,25 @@
+@use '../../scss/' as *;
+
+.breadcum {
+    margin-top: $header-height;
+    background-color: $breadcum-bg;
+    padding: 4% 0;
+    max-height: 240px;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+
+        &__title {
+            color: $white;
+            font-size: $font-size-l;
+        }
+
+        &__navigation {
+            color: $white;
+            font-size: $font-size-s;
+        }
+    }
+}
