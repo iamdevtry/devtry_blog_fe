@@ -1,0 +1,107 @@
+@use '../../scss/' as *;
+.header {
+    height: $header-height;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $white;
+    &__wrap {
+        @include flex(center, space-between);
+        height: 100%;
+        padding: 0 2rem;
+
+        @include mobile {
+            justify-content: center;
+        }
+    }
+
+    &__left {
+        @include flex(center, flex-start);
+        height: 100%;
+        &-logo {
+            height: 100%;
+
+            img {
+                height: 100%;
+            }
+        }
+
+        &-menu {
+            position: relative;
+            @include flex(center, unset);
+            & > * ~ * {
+                margin-left: 2rem;
+            }
+
+            li {
+                padding: 5px 0;
+                font-weight: 400;
+                position: relative;
+                font-size: $font-size-s;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translate(-50%);
+                    width: 0;
+                    height: 2px;
+                    transition: all 0.5s ease;
+                    background-color: $main-color;
+                }
+
+                &.active::after,
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+            @include mobile {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                height: 5rem;
+                width: 100%;
+                background-color: $body-bg;
+                padding: 0 2rem;
+                box-shadow: $box-shadow;
+
+                @include flex(center, space-between);
+
+                & > * ~ * {
+                    margin-left: 0;
+                }
+            }
+
+            &--submenu {
+                display: none;
+                position: absolute;
+                top: $header-height;
+                box-shadow: $box-shadow;
+                min-width: 200px;
+
+                & > * ~ * {
+                    border-top: 1px solid $border-color;
+                }
+                &.show {
+                    display: block;
+                }
+
+                li {
+                    padding: 1rem 2rem;
+                    font-size: $font-size-s;
+                    font-weight: 400;
+                    background-color: $white;
+                    &:hover {
+                        background-color: $body-bg;
+                    }
+                }
+
+                li:hover {
+                    background-color: aliceblue;
+                }
+            }
+        }
+    }
+}
