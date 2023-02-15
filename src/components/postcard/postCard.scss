@@ -15,6 +15,10 @@
             max-width: 100%;
             height: auto;
         }
+
+        // @include mobile {
+        //     display: none;
+        // }
     }
     &__content {
         line-height: 26px;
@@ -41,13 +45,22 @@
         color: $main-color;
         font-weight: 600;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include mobile {
+            flex-direction: column-reverse;
+        }
     }
 
     &__tags {
         padding: 5px 10px;
         // border-radius: 4px;
         @include flex(center, space-between);
+
+        @include mobile {
+            flex-wrap: wrap;
+        }
     }
 
     &__tag {
@@ -62,12 +75,19 @@
             cursor: pointer;
             text-decoration: underline;
         }
+
+        @include mobile {
+            margin-top: 4px;
+        }
     }
 
     &__actions {
         padding: 5px 10px;
         // border-radius: 4px;
         @include flex(center, space-between);
+        @include mobile {
+            justify-content: flex-start;
+        }
     }
 
     &__comment,

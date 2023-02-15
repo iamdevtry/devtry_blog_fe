@@ -6,11 +6,11 @@ import './postCard.scss';
 const tags = ['Windows', 'Mac', 'Linux', 'Android', 'iOS', 'Windows Phone'];
 const PostCard = () => {
     return (
-        <Row className="post-card container">
-            <Col span={8} className="post-card__image">
-                <img src="https://picsum.photos/800/400" alt="post image" />
+        <Row className="post-card">
+            <Col lg={8} md={8} xs={0} className="post-card__image">
+                <img src="https://picsum.photos/800/400" alt="post" />
             </Col>
-            <Col span={16} className="post-card__content">
+            <Col lg={16} md={16} xs={24} className="post-card__content">
                 <h3 className="post-card__title">
                     <Link>Why are the Windows chassis hardware button hotkeys so strange?</Link>
                 </h3>
@@ -27,7 +27,7 @@ const PostCard = () => {
                     {/* show tag */}
                     <span className="post-card__tags">
                         {tags.map((tag, index) => (
-                            <div className="post-card__tag">
+                            <div className="post-card__tag" key={index}>
                                 <Link key={index} to={`/tag/${tag}`}>
                                     {tag}
                                 </Link>
