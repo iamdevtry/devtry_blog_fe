@@ -1,0 +1,83 @@
+@use '../../scss/' as *;
+
+.footer {
+    width: 100%;
+    // background-color: $breadcum-bg;
+
+    &__info {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 60px;
+        // color: $white;
+        font-size: $font-size-s;
+        font-family: $font-family;
+        text-align: center;
+    }
+
+    &__logo {
+        width: 160px;
+        height: 100%;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &__links {
+        a {
+            color: $text-color;
+            font-size: $font-size-s;
+            font-weight: 200;
+
+            &:hover {
+                color: $main-color;
+                text-decoration: underline $main-color;
+            }
+        }
+    }
+
+    &__social {
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: $text-color;
+            font-size: $font-size-s;
+            font-weight: 200;
+
+            &:hover {
+                color: $main-color;
+                text-decoration: underline $main-color;
+            }
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    &__copyright {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        text-align: left;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+            color: red;
+        }
+    }
+}
