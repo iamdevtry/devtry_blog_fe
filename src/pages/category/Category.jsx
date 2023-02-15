@@ -1,5 +1,5 @@
 import Breadcum from '../../components/breadcum/Breadcum';
-import PostCard from '../../components/postcard/PostCard';
+import PostCard from '../../components/post-card/PostCard';
 
 const Category = () => {
     return (

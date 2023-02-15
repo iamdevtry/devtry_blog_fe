@@ -8,3 +8,16 @@
     background-color: $white;
     box-shadow: $box-shadow;
 }
+
+// css seperate .widget-list into 3 column
+.widget-list-vertical {
+    width: 33.3333333333%;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    vertical-align: top;
+
+    // @include mobile {
+    //     width: 100%;
+    // }
+}

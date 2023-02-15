@@ -1,0 +1,103 @@
+@use '../../scss/' as *;
+
+.post {
+    margin-top: calc(#{$header-height} + 8px);
+
+    &__wrapper {
+        margin-bottom: 2rem;
+        padding-top: 60px;
+        padding-left: 16%;
+        padding-right: 16%;
+        background-color: #fff;
+        border-radius: 4px 4px 0 0;
+        box-shadow: $box-shadow;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @include mobile {
+            padding-left: 8%;
+            padding-right: 8%;
+        }
+    }
+
+    &__title {
+        h1 {
+            color: $text-color;
+            font-weight: 400;
+        }
+    }
+
+    &__author {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    &__author--name {
+        h3 {
+            color: $text-color;
+            font-weight: 400;
+        }
+    }
+
+    &__entry-meta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        border-top: 2px solid #ccc;
+        padding: 8px 0;
+    }
+
+    &__entry-meta--date {
+        margin-right: 20px;
+        color: $text-color;
+    }
+
+    &__content {
+        color: $text-color;
+        font-size: $font-size-l;
+
+        word-break: break-word;
+
+        p {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: $main-color;
+            text-decoration: underline;
+        }
+    }
+
+    &__tags {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        padding-bottom: 24px;
+    }
+
+    &__tags-list {
+        display: inline-flex;
+    }
+    &__tags-item {
+        margin-left: 8px;
+        margin-right: 8px;
+        background-color: aliceblue;
+        padding: 8px;
+        border-radius: 4px;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__related {
+        display: flex;
+        margin-top: 2rem;
+    }
+}
