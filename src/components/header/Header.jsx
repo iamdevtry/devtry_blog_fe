@@ -48,7 +48,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            <div className="header__wrap container_fluid">
+            <div className="header__wrap container">
                 <div className="header__left">
                     <div className="header__left-logo">
                         <Link to="/">

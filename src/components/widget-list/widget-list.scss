@@ -1,0 +1,10 @@
+@use '../../scss/' as *;
+
+.widget-list {
+    width: 100%;
+    padding: 20px;
+    margin-top: 12px;
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: $box-shadow;
+}

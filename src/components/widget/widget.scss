@@ -1,0 +1,23 @@
+@use '../../scss/' as *;
+
+.widget {
+    width: 100%;
+    background-color: $white;
+    &__title {
+        font-size: $font-size-xl;
+        font-weight: 400;
+        color: $text-color;
+        margin-bottom: 1rem;
+    }
+
+    &__category {
+        font-size: $font-size-m;
+        color: $main-color;
+        margin-bottom: 0.6rem;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
