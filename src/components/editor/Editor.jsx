@@ -1,8 +1,11 @@
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
+import ImageResize from 'quill-image-resize-module-react';
+
 import 'react-quill/dist/quill.snow.css';
 
 Quill.register('modules/imageUploader', ImageUploader);
+Quill.register('modules/imageResize', ImageResize);
 
 const options = {
     modules: {
@@ -35,6 +38,10 @@ const options = {
                 });
             },
         },
+        imageResize: {
+            parchment: Quill.import('parchment'),
+            modules: ['Resize', 'DisplaySize', 'Toolbar'],
+        },
     },
     formats: [
         'header',
@@ -48,6 +55,7 @@ const options = {
         'indent',
         'link',
         'image',
+        'video',
     ],
     theme: 'snow',
 };
