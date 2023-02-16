@@ -6,6 +6,10 @@ import Category from '../pages/category/Category';
 import About from '../pages/about/About';
 import Post from '../pages/post/Post';
 
+import AdminLayout from '../pages/admin/_layout/AdminLayout';
+import Dashboard from '../pages/admin/dashboard/Dashboard';
+import CreatePost from '../pages/admin/post/CreatePost';
+
 const RouteConfig = () => {
     return (
         <BrowserRouter>
@@ -17,6 +21,14 @@ const RouteConfig = () => {
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
                     <Route path="post" element={<Post />} />
+                </Route>
+                <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="add-post" element={<CreatePost />} />
+                    {/* <Route path="home" element={<Home />} />
+                    <Route path="categories" element={<Category />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="post" element={<Post />} /> */}
                 </Route>
             </Routes>
         </BrowserRouter>
