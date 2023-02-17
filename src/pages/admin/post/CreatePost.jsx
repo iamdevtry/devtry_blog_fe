@@ -2,6 +2,8 @@ import { Button, Cascader, Col, Form, Input, Row, Select } from 'antd';
 import { useState } from 'react';
 import Editor from '../../../components/editor/Editor';
 
+import generateSlug from '../../../utils/generate-slug';
+
 const { Option } = Select;
 const residences = [
     {
@@ -70,8 +72,22 @@ const tailFormItemLayout = {
 
 const CreatePost = () => {
     const [form] = Form.useForm();
+    const [content, setContent] = useState(null);
+
     const onFinish = (values) => {
+        values.content = content;
         console.log('Received values of form: ', values);
+    };
+
+    const onContentChange = (e) => {
+        setContent(e);
+    };
+
+    const handleTitleChange = (e) => {
+        let title = e.target.value;
+        form.setFieldsValue({
+            slug: generateSlug(title),
+        });
     };
 
     return (
@@ -101,7 +117,7 @@ const CreatePost = () => {
                             },
                         ]}
                     >
-                        <Input.TextArea showCount maxLength={75} />
+                        <Input.TextArea onChange={handleTitleChange} showCount maxLength={75} />
                     </Form.Item>
                     <Form.Item name="meta_title" label="Meta Title">
                         <Input.TextArea showCount maxLength={100} />
@@ -122,7 +138,7 @@ const CreatePost = () => {
                         <Input.TextArea />
                     </Form.Item>
                     <Form.Item name="content" label="Content">
-                        <Editor />
+                        <Editor onContentChange={onContentChange} />
                     </Form.Item>
                 </Col>
                 <Col span={12}>
