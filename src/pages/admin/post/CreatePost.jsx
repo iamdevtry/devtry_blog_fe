@@ -1,44 +1,12 @@
-import { Button, Cascader, Col, Form, Input, Row, Select } from 'antd';
 import { useState } from 'react';
-import Editor from '../../../components/editor/Editor';
+import { Button, Col, Form, Input, Row, Select, AutoComplete, Collapse, Modal } from 'antd';
 
+import Editor from '../../../components/editor/Editor';
+import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
 
 const { Option } = Select;
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [
-            {
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [
-                    {
-                        value: 'xihu',
-                        label: 'West Lake',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [
-            {
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [
-                    {
-                        value: 'zhonghuamen',
-                        label: 'Zhong Hua Men',
-                    },
-                ],
-            },
-        ],
-    },
-];
+const { Panel } = Collapse;
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -74,6 +42,20 @@ const CreatePost = () => {
     const [form] = Form.useForm();
     const [content, setContent] = useState(null);
 
+    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+    const onParentPostChange = (value) => {
+        if (!value) {
+            setAutoCompleteResult([]);
+        } else {
+            setAutoCompleteResult(['.com', '.org', '.net'].map((post) => `${value}${post}`));
+        }
+    };
+    const parentPostOptions = autoCompleteResult.map((post) => ({
+        label: post,
+        value: post,
+    }));
+
     const onFinish = (values) => {
         values.content = content;
         console.log('Received values of form: ', values);
@@ -96,17 +78,13 @@ const CreatePost = () => {
             form={form}
             name="register"
             onFinish={onFinish}
-            initialValues={{
-                residence: ['zhejiang', 'hangzhou', 'xihu'],
-                prefix: '86',
-            }}
             style={{
-                maxWidth: '80%',
+                maxWidth: '100%',
             }}
             scrollToFirstError
         >
-            <Row>
-                <Col span={12}>
+            <Row gutter={16}>
+                <Col xl={16} lg={24} md={24} sm={24} xs={24}>
                     <Form.Item
                         name="title"
                         label="Title"
@@ -122,78 +100,60 @@ const CreatePost = () => {
                     <Form.Item name="meta_title" label="Meta Title">
                         <Input.TextArea showCount maxLength={100} />
                     </Form.Item>
-                    <Form.Item
-                        name="slug"
-                        label="Slug"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input Slug!',
-                            },
-                        ]}
-                    >
-                        <Input.TextArea showCount maxLength={100} />
-                    </Form.Item>
-                    <Form.Item name="sumary" label="Sumary">
-                        <Input.TextArea />
-                    </Form.Item>
+
                     <Form.Item name="content" label="Content">
                         <Editor onContentChange={onContentChange} />
                     </Form.Item>
                 </Col>
-                <Col span={12}>
-                    <Form.Item
-                        name="residence"
-                        label="Habitual Residence"
-                        rules={[
-                            {
-                                type: 'array',
-                                required: true,
-                                message: 'Please select your habitual residence!',
-                            },
-                        ]}
-                    >
-                        <Cascader options={residences} />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="gender"
-                        label="Gender"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please select gender!',
-                            },
-                        ]}
-                    >
-                        <Select placeholder="select your gender">
-                            <Option value="male">Male</Option>
-                            <Option value="female">Female</Option>
-                            <Option value="other">Other</Option>
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-                        <Row gutter={8}>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="captcha"
-                                    noStyle
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input the captcha you got!',
-                                        },
-                                    ]}
+                <Col xl={8} lg={24} md={24} sm={24} xs={24}>
+                    <Collapse size="small">
+                        <Panel header="Options">
+                            <Form.Item name="thumbnail" label="Thumbnail">
+                                <UploadImage />
+                            </Form.Item>
+                            <Form.Item
+                                name="slug"
+                                label="Slug"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input Slug!',
+                                    },
+                                ]}
+                            >
+                                <Input.TextArea showCount maxLength={100} />
+                            </Form.Item>
+                            <Form.Item name="sumary" label="Sumary">
+                                <Input.TextArea />
+                            </Form.Item>
+                            <Form.Item
+                                name="category"
+                                label="Cagetory"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please select category!',
+                                        type: 'array',
+                                    },
+                                ]}
+                            >
+                                <Select mode="multiple" placeholder="select your category">
+                                    <Option value="0">Male</Option>
+                                    <Option value="1">Female</Option>
+                                    <Option value="2">Other</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="parent_id" label="Parent Post">
+                                <AutoComplete
+                                    options={parentPostOptions}
+                                    onChange={onParentPostChange}
+                                    placeholder="parent post"
                                 >
                                     <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={12}>
-                                <Button>Get captcha</Button>
-                            </Col>
-                        </Row>
-                    </Form.Item>
+                                </AutoComplete>
+                            </Form.Item>
+                        </Panel>
+                    </Collapse>
 
                     <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">

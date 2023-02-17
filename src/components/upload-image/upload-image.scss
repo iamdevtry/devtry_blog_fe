@@ -1,0 +1,12 @@
+@use '../../scss/' as *;
+
+.custom-upload-image {
+    &__btn {
+        margin-left: 12px;
+    }
+
+    &__img {
+        box-shadow: $box-shadow;
+        border-radius: 4px;
+    }
+}
