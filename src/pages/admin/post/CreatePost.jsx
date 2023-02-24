@@ -5,6 +5,8 @@ import Editor from '../../../components/editor/Editor';
 import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
 
+import devtryBlogApi from '../../../api/devtryBlogApi';
+
 const { Option } = Select;
 const { Panel } = Collapse;
 const formItemLayout = {
@@ -56,9 +58,15 @@ const CreatePost = () => {
         value: post,
     }));
 
+    const addPost = async (values) => {
+        const response = await devtryBlogApi.addPost(values);
+        console.log(response);
+    };
+
     const onFinish = (values) => {
         values.content = content;
         console.log('Received values of form: ', values);
+        addPost(values);
     };
 
     const onContentChange = (e) => {
