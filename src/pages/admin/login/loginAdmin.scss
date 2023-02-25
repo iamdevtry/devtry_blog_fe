@@ -1,0 +1,6 @@
+@use '../../../scss/' as *;
+
+.admin-login {
+    margin-top: calc(#{$header-height} + 8px);
+    height: 50vh;
+}

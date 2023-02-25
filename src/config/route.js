@@ -9,6 +9,7 @@ import Post from '../pages/post/Post';
 import AdminLayout from '../pages/admin/_layout/AdminLayout';
 import Dashboard from '../pages/admin/dashboard/Dashboard';
 import CreatePost from '../pages/admin/post/CreatePost';
+import LoginAdmin from '../pages/admin/login/LoginAdmin';
 
 const RouteConfig = () => {
     return (
@@ -21,6 +22,7 @@ const RouteConfig = () => {
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
                     <Route path="post" element={<Post />} />
+                    <Route path="login" element={<LoginAdmin />} />
                 </Route>
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />

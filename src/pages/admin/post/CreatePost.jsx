@@ -59,13 +59,23 @@ const CreatePost = () => {
     }));
 
     const addPost = async (values) => {
-        const response = await devtryBlogApi.addPost(values);
-        console.log(response);
+        await devtryBlogApi
+            .addPost(values)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+                Modal.error({
+                    title: err.response.data.message,
+                    content: err.response.data.log,
+                });
+            });
     };
 
     const onFinish = (values) => {
         values.content = content;
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         addPost(values);
     };
 
