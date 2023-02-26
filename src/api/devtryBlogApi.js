@@ -12,5 +12,31 @@ const devtryBlogApi = {
             headers: authHeader(),
         });
     },
+    getPosts: (page, limit) => {
+        if (page === undefined) {
+            page = 1;
+        }
+        if (limit === undefined) {
+            limit = 10;
+        }
+        const url = `/posts?page=${page}&limit=${limit}`;
+        return axiosClient.get(url);
+    },
+    getPost: (id) => {
+        const url = `/posts/${id}`;
+        return axiosClient.get(url);
+    },
+    updatePost: (id, post) => {
+        const url = `/posts/${id}`;
+        return axiosClient.put(url, post, {
+            headers: authHeader(),
+        });
+    },
+    deletePost: (id) => {
+        const url = `/posts/${id}`;
+        return axiosClient.delete(url, {
+            headers: authHeader(),
+        });
+    },
 };
 export default devtryBlogApi;
