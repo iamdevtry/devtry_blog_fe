@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Form, Input, Row, Select, AutoComplete, Collapse, Modal } from 'antd';
 
 import Editor from '../../../components/editor/Editor';
 import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
-
 import devtryBlogApi from '../../../api/devtryBlogApi';
 
 const { Option } = Select;
@@ -43,7 +42,6 @@ const tailFormItemLayout = {
 const CreatePost = () => {
     const [form] = Form.useForm();
     const [content, setContent] = useState(null);
-
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     const onParentPostChange = (value) => {
@@ -124,8 +122,8 @@ const CreatePost = () => {
                     </Form.Item>
                 </Col>
                 <Col xl={8} lg={24} md={24} sm={24} xs={24}>
-                    <Collapse size="small">
-                        <Panel header="Options">
+                    <Collapse size="small" defaultActiveKey={['1']}>
+                        <Panel header="Options" key={1}>
                             <Form.Item name="thumbnail" label="Thumbnail">
                                 <UploadImage />
                             </Form.Item>
