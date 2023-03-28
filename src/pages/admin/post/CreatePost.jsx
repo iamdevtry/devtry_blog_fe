@@ -173,7 +173,7 @@ const CreatePost = () => {
 
                     <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">
-                            Register
+                            Add post
                         </Button>
                     </Form.Item>
                 </Col>

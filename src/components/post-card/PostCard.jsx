@@ -4,7 +4,7 @@ import { FaRegComments } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi';
 import './postCard.scss';
 const tags = ['Windows', 'Mac', 'Linux', 'Android', 'iOS', 'Windows Phone'];
-const PostCard = () => {
+const PostCard = ({ post }) => {
     return (
         <Row className="post-card">
             <Col lg={8} md={8} xs={0} className="post-card__image">
@@ -12,14 +12,12 @@ const PostCard = () => {
             </Col>
             <Col lg={16} md={16} xs={24} className="post-card__content">
                 <h3 className="post-card__title">
-                    <Link>Why are the Windows chassis hardware button hotkeys so strange?</Link>
+                    <Link to={post.slug}>{post.title}</Link>
                 </h3>
-                <span>February 14, 2023</span>
+                <span>{post.created_at}</span>
                 <br />
                 <span>Raymond Chen</span>
-                <p className="post-card__description">
-                    Operating within the constraints of the system.
-                </p>
+                <p className="post-card__description">{post.sumary}</p>
             </Col>
             <Divider dashed />
             <Col span={24} className="post-card__footer">
