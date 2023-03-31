@@ -22,7 +22,6 @@ const PostCard = ({ post }) => {
             <Divider dashed />
             <Col span={24} className="post-card__footer">
                 <div className="post-card__more">
-                    {/* show tag */}
                     <span className="post-card__tags">
                         {tags.map((tag, index) => (
                             <div className="post-card__tag" key={index}>
@@ -32,12 +31,10 @@ const PostCard = ({ post }) => {
                             </div>
                         ))}
                     </span>
-                    {/* show comment */}
                     <div className="post-card__actions">
                         <span className="post-card__comment">
                             <FaRegComments /> 2 comments
                         </span>
-                        {/* show like */}
                         <span className="post-card__like">
                             <BiLike /> 2 likes
                         </span>

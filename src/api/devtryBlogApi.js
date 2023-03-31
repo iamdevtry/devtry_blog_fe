@@ -26,6 +26,10 @@ const devtryBlogApi = {
         const url = `/posts/${id}`;
         return axiosClient.get(url);
     },
+    getPostBySlug: (slug) => {
+        const url = `/posts/slug/${slug}`;
+        return axiosClient.get(url);
+    },
     updatePost: (id, post) => {
         const url = `/posts/${id}`;
         return axiosClient.put(url, post, {

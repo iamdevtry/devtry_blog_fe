@@ -29,11 +29,9 @@ const Home = () => {
             .getPosts()
             .then((res) => {
                 setData(res.data);
-                console.log(res.data);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
                 setLoading(false);
             });
     };

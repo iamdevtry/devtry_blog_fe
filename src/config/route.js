@@ -21,7 +21,8 @@ const RouteConfig = () => {
                     <Route path="blog" element={<Blog />} />
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
-                    <Route path="post" element={<Post />} />
+                    {/* <Route path="posts" element={<Post />} /> */}
+                    <Route path="/:slug" element={<Post />} />
                     <Route path="login" element={<LoginAdmin />} />
                 </Route>
                 <Route path="/admin" element={<AdminLayout />}>
