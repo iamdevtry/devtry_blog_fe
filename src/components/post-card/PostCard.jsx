@@ -12,7 +12,7 @@ const PostCard = ({ post }) => {
             </Col>
             <Col lg={16} md={16} xs={24} className="post-card__content">
                 <h3 className="post-card__title">
-                    <Link to={post.slug}>{post.title}</Link>
+                    <Link to={`/${post.slug}`}>{post.title}</Link>
                 </h3>
                 <span>{post.created_at}</span>
                 <br />

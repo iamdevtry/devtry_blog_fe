@@ -21,15 +21,15 @@ const headerNav = [
         chilldren: [
             {
                 display: 'Category 1',
-                path: '/category-1',
+                path: 'category-1',
             },
             {
                 display: 'Category 2',
-                path: '/category-2',
+                path: 'category-2',
             },
             {
                 display: 'Category 3',
-                path: '/category-3',
+                path: 'category-3',
             },
         ],
     },
@@ -74,12 +74,12 @@ const Header = () => {
                             <li key={index} className={`${index === active ? 'active' : ''}`}>
                                 <Link
                                     to={item.path}
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
                                     style={{ alignItems: 'center', display: 'flex' }}
                                 >
                                     {item.display}
                                     {item.chilldren && (
                                         <FaChevronDown
+                                            onClick={() => setIsMenuOpen(!isMenuOpen)}
                                             style={{
                                                 cursor: 'pointer',
                                                 marginLeft: '5px',
