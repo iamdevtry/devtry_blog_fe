@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
 import { FaBeer, FaChevronDown } from 'react-icons/fa';
 
@@ -15,7 +17,7 @@ const headerNav = [
     },
     {
         display: 'Categories',
-        path: '/categories',
+        path: '#',
         chilldren: [
             {
                 display: 'Category 1',
@@ -39,12 +41,24 @@ const headerNav = [
 const Header = () => {
     const { pathname } = useLocation();
 
+    const ref = useRef();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const active = headerNav.findIndex((e) => e.path === pathname);
 
-    const showSubMenu = () => {
-        const subMenu = document.querySelector('.header__left-menu--submenu');
-        subMenu.classList.toggle('show');
-    };
+    useEffect(() => {
+        const checkIfClickedOutside = (e) => {
+            if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', checkIfClickedOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', checkIfClickedOutside);
+        };
+    }, [isMenuOpen]);
 
     return (
         <div className="header">
@@ -55,17 +69,17 @@ const Header = () => {
                             <img src={logo} alt="logo" />
                         </Link>
                     </div>
-                    <div className="header__left-menu">
+                    <div className="header__left-menu" ref={ref}>
                         {headerNav.map((item, index) => (
                             <li key={index} className={`${index === active ? 'active' : ''}`}>
                                 <Link
                                     to={item.path}
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
                                     style={{ alignItems: 'center', display: 'flex' }}
                                 >
                                     {item.display}
                                     {item.chilldren && (
                                         <FaChevronDown
-                                            onClick={showSubMenu}
                                             style={{
                                                 cursor: 'pointer',
                                                 marginLeft: '5px',
@@ -74,7 +88,11 @@ const Header = () => {
                                     )}
                                 </Link>
                                 {item.chilldren && (
-                                    <ul className="header__left-menu--submenu">
+                                    <ul
+                                        className={`header__left-menu--submenu ${
+                                            isMenuOpen ? 'show' : ''
+                                        }`}
+                                    >
                                         {item.chilldren.map((child, index) => (
                                             <li key={index}>
                                                 <Link to={child.path}>{child.display}</Link>
