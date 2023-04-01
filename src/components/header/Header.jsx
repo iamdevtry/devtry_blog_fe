@@ -11,25 +11,25 @@ const headerNav = [
         display: 'Trang chủ',
         path: '/',
     },
-    {
-        display: 'Blog',
-        path: '/blog',
-    },
+    // {
+    //     display: 'Blog',
+    //     path: '/blog',
+    // },
     {
         display: 'Categories',
         path: '#',
         chilldren: [
             {
                 display: 'Category 1',
-                path: 'category-1',
+                path: '1st-category',
             },
             {
                 display: 'Category 2',
-                path: 'category-2',
+                path: '2st-category',
             },
             {
                 display: 'Category 3',
-                path: 'category-3',
+                path: '3st-category',
             },
         ],
     },

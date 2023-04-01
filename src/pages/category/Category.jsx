@@ -16,7 +16,7 @@ const Category = () => {
     const getListPost = () => {
         setLoading(true);
         devtryBlogApi
-            .getPosts()
+            .getPostByCategorySlug(slug)
             .then((res) => {
                 setData(res.data);
                 setLoading(false);
