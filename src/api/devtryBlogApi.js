@@ -46,5 +46,9 @@ const devtryBlogApi = {
             headers: authHeader(),
         });
     },
+    getCategories: () => {
+        const url = '/categories';
+        return axiosClient.get(url);
+    },
 };
 export default devtryBlogApi;

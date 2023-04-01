@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Form, Input, Row, Select, AutoComplete, Collapse, Modal } from 'antd';
+import { Button, Col, Form, Input, Row, Select, Collapse, Modal } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 import Editor from '../../../components/editor/Editor';
 import UploadImage from '../../../components/upload-image/UploadImage';
@@ -39,22 +40,88 @@ const tailFormItemLayout = {
     },
 };
 
+const options = [];
+for (let i = 10; i < 36; i++) {
+    options.push({
+        value: i.toString(36) + i,
+        label: i.toString(36) + i,
+    });
+}
+const handleChange = (value) => {
+    console.log(`selected ${value}`);
+};
+
+// const handleParentPostChange = (value) => {
+//     console.log(`selected ${value}`);
+// };
+
+// const parentPostExample = [
+//     {
+//         label: 'https://www.google.com',
+//         value: 'id1',
+//     },
+//     {
+//         label: 'https://www.google.org',
+//         value: 'id2',
+//     },
+//     {
+//         label: 'https://www.google.net',
+//         value: 'id3',
+//     },
+// ];
+
 const CreatePost = () => {
     const [form] = Form.useForm();
-    const [content, setContent] = useState(null);
-    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
-    const onParentPostChange = (value) => {
-        if (!value) {
-            setAutoCompleteResult([]);
+    const [categories, setCategories] = useState([]);
+
+    const [content, setContent] = useState(null);
+
+    // const [parentPosts, setParentPosts] = useState([]);
+    // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+    // const onParentPostChange = (value) => {
+    //     if (!value) {
+    //         setAutoCompleteResult([]);
+    //     } else {
+    //         const postParents = parentPosts.filter((post) => post.label.includes(value));
+    //         setAutoCompleteResult(postParents.map((post) => `${post.label}`));
+    //     }
+    // };
+    // const parentPostOptions = autoCompleteResult.map((post) => ({
+    //     label: post,
+    //     value: post,
+    // }));
+
+    // const handleSearch = (value) => {
+    //     console.log(value);
+    //     setParentPosts(parentPostExample);
+    // };
+
+    let i = 0;
+    useEffect(() => {
+        i++;
+        console.log(i);
+        const getCategories = async () => {
+            devtryBlogApi
+                .getCategories()
+                .then((res) => {
+                    console.log('call api');
+                    setCategories(res.data);
+                    localStorage.setItem('categories', JSON.stringify(res.data));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
+        const categoriesLocal = localStorage.getItem('categories');
+        if (categoriesLocal) {
+            setCategories(JSON.parse(categoriesLocal));
         } else {
-            setAutoCompleteResult(['.com', '.org', '.net'].map((post) => `${value}${post}`));
+            getCategories();
         }
-    };
-    const parentPostOptions = autoCompleteResult.map((post) => ({
-        label: post,
-        value: post,
-    }));
+    }, []);
 
     const addPost = async (values) => {
         await devtryBlogApi
@@ -73,8 +140,8 @@ const CreatePost = () => {
 
     const onFinish = (values) => {
         values.content = content;
-        // console.log('Received values of form: ', values);
-        addPost(values);
+        console.log('Received values of form: ', values);
+        // addPost(values);
     };
 
     const onContentChange = (e) => {
@@ -154,19 +221,45 @@ const CreatePost = () => {
                                 ]}
                             >
                                 <Select mode="multiple" placeholder="select your category">
-                                    <Option value="0">Male</Option>
-                                    <Option value="1">Female</Option>
-                                    <Option value="2">Other</Option>
+                                    {categories.map((category) => (
+                                        <Option key={category.id} value={category.id}>
+                                            {category.title}
+                                        </Option>
+                                    ))}
                                 </Select>
                             </Form.Item>
-                            <Form.Item name="parent_id" label="Parent Post">
-                                <AutoComplete
-                                    options={parentPostOptions}
-                                    onChange={onParentPostChange}
-                                    placeholder="parent post"
-                                >
-                                    <Input />
-                                </AutoComplete>
+                            {/* <Form.Item name="parent_id" label="Parent Post">
+                                <Row>
+                                    <Col span={18}>
+                                        <Select
+                                            mode="multiple"
+                                            allowClear
+                                            options={parentPosts}
+                                            onChange={handleParentPostChange}
+                                            // onSearch={handleSearch}
+                                            // onSelect={(value) => {
+                                            //     console.log(value);
+                                            // }}
+                                            placeholder="Select a parent post"
+                                        />
+                                    </Col>
+                                    <Col span={6}>
+                                        <Button onClick={handleSearch} icon={<SearchOutlined />}>
+                                            Search
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Form.Item> */}
+                            <Form.Item name="tags" label="Tags">
+                                <Select
+                                    mode="tags"
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    onChange={handleChange}
+                                    tokenSeparators={[',']}
+                                    options={options}
+                                />
                             </Form.Item>
                         </Panel>
                     </Collapse>
