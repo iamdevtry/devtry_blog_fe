@@ -1,10 +1,12 @@
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import {
     DesktopOutlined,
     TeamOutlined,
     FileOutlined,
     PieChartOutlined,
     UserOutlined,
+    FileSearchOutlined,
+    FileAddOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
@@ -22,15 +24,15 @@ function getItem(label, key, icon, children) {
 const items = [
     getItem('Option 1', '1', <PieChartOutlined />),
     getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
+    getItem('Post', 'sub1', <FileSearchOutlined />, [
+        getItem(<Link to={`add-post`}>New post</Link>, '3', <FileAddOutlined />),
+        getItem(<Link to={`list-post`}>All post</Link>, '4', <FileOutlined />),
     ]),
     getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
     getItem('Files', '9', <FileOutlined />),
 ];
 const App = () => {
+    let { pathname } = useLocation();
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
@@ -64,8 +66,11 @@ const App = () => {
                             margin: '16px 0',
                         }}
                     >
-                        <Breadcrumb.Item>User</Breadcrumb.Item>
-                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                        {pathname.split('/').map((item, index) => {
+                            if (item) {
+                                return <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>;
+                            }
+                        })}
                     </Breadcrumb>
                     <div
                         style={{

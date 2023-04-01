@@ -10,6 +10,7 @@ import AdminLayout from '../pages/admin/_layout/AdminLayout';
 import Dashboard from '../pages/admin/dashboard/Dashboard';
 import CreatePost from '../pages/admin/post/CreatePost';
 import LoginAdmin from '../pages/admin/login/LoginAdmin';
+import ListPost from '../pages/admin/post/ListPost';
 
 const RouteConfig = () => {
     return (
@@ -28,6 +29,7 @@ const RouteConfig = () => {
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="add-post" element={<CreatePost />} />
+                    <Route path="list-post" element={<ListPost />} />
                     {/* <Route path="home" element={<Home />} />
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
