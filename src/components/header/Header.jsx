@@ -95,7 +95,9 @@ const Header = () => {
                                     >
                                         {item.chilldren.map((child, index) => (
                                             <li key={index}>
-                                                <Link to={child.path}>{child.display}</Link>
+                                                <Link to={`categories/${child.path}`}>
+                                                    {child.display}
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>

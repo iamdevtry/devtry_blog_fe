@@ -19,7 +19,7 @@ const RouteConfig = () => {
                     <Route index element={<Home />} />
                     <Route path="home" element={<Home />} />
                     <Route path="blog" element={<Blog />} />
-                    <Route path="categories" element={<Category />} />
+                    <Route path="categories/:slug" element={<Category />} />
                     <Route path="about" element={<About />} />
                     {/* <Route path="posts" element={<Post />} /> */}
                     <Route path="/:slug" element={<Post />} />
