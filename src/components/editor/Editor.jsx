@@ -7,6 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 Quill.register('modules/imageUploader', ImageUploader);
 Quill.register('modules/imageResize', ImageResize);
 
+import './editor.scss';
 const options = {
     modules: {
         toolbar: [
