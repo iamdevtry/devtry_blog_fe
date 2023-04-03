@@ -31,7 +31,7 @@ const Post = () => {
 
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-
+    const [relatedPost, setRelatedPost] = useState([]);
     useEffect(() => {
         const getPost = () => {
             setLoading(true);
@@ -45,9 +45,30 @@ const Post = () => {
                     setLoading(false);
                 });
         };
-
         getPost();
     }, [slug]);
+
+    useEffect(() => {
+        const getRelatedPosts = () => {
+            setLoading(true);
+            devtryBlogApi
+                .getRelatedPosts(data?.tags[0]?.id)
+                .then((res) => {
+                    //remove current post
+                    const index = res.data.findIndex((item) => item.id === data.id);
+                    res.data.splice(index, 1);
+                    setRelatedPost(res.data);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    setLoading(false);
+                });
+        };
+        if (data.tags) {
+            getRelatedPosts();
+        }
+    }, [data]);
+
     return (
         <div className="post">
             <div className="container" style={{ padding: '20px 15px' }}>
@@ -99,12 +120,19 @@ const Post = () => {
                         </Row>
                         <h3>Related Posts</h3>
                         <Row gutter={24} className="post__related">
-                            <Col lg={12} md={12} sm={24} xs={24}>
-                                <PostRelatedCard />
-                            </Col>
-                            <Col lg={12} md={12} sm={24} xs={24}>
-                                <PostRelatedCard />
-                            </Col>
+                            {relatedPost &&
+                                relatedPost.map((post) => (
+                                    <Col lg={12} md={12} sm={24} xs={24} key={post.id}>
+                                        <PostRelatedCard post={post} />
+                                    </Col>
+                                ))}
+                            {relatedPost.length === 0 && (
+                                <Col lg={12} md={12} sm={24} xs={24}>
+                                    <div className="post__related--empty">
+                                        <h4>There is no related post</h4>
+                                    </div>
+                                </Col>
+                            )}
                         </Row>
                         <Row>
                             <WidgetList

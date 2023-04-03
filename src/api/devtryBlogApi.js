@@ -38,6 +38,10 @@ const devtryBlogApi = {
         const url = `/tags/${id}/posts`;
         return axiosClient.get(url);
     },
+    getRelatedPosts: (id) => {
+        const url = `/tags/${id}/posts?page=1&limit=2`;
+        return axiosClient.get(url);
+    },
     updatePost: (id, post) => {
         const url = `/posts/${id}`;
         return axiosClient.put(url, post, {
