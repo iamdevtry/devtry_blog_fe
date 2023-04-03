@@ -3,6 +3,7 @@ import MainLayout from '../pages/_layout/MainLayout';
 import Home from '../pages/home/Home';
 import Blog from '../pages/blog/Blog';
 import Category from '../pages/category/Category';
+import Tag from '../pages/tag/Tag';
 import About from '../pages/about/About';
 import Post from '../pages/post/Post';
 
@@ -21,6 +22,7 @@ const RouteConfig = () => {
                     <Route path="home" element={<Home />} />
                     {/* <Route path="blog" element={<Blog />} /> */}
                     <Route path="categories/:slug" element={<Category />} />
+                    <Route path="tags/:slug/:id" element={<Tag />} />
                     <Route path="about" element={<About />} />
                     {/* <Route path="posts" element={<Post />} /> */}
                     <Route path="/:slug" element={<Post />} />

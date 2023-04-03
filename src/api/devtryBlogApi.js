@@ -34,6 +34,10 @@ const devtryBlogApi = {
         const url = `/categories/slug/${slug}/posts`;
         return axiosClient.get(url);
     },
+    getPostByTagId: (id) => {
+        const url = `/tags/${id}/posts`;
+        return axiosClient.get(url);
+    },
     updatePost: (id, post) => {
         const url = `/posts/${id}`;
         return axiosClient.put(url, post, {

@@ -23,9 +23,9 @@ const PostCard = ({ post }) => {
             <Col span={24} className="post-card__footer">
                 <div className="post-card__more">
                     <span className="post-card__tags">
-                        {post?.tags.map((tag, index) => (
+                        {post?.tags?.map((tag, index) => (
                             <div className="post-card__tag" key={index}>
-                                <Link key={index} to={`/tag/${tag.slug}`}>
+                                <Link key={index} to={`/tags/${tag.slug}/${tag.id}`}>
                                     {tag.title}
                                 </Link>
                             </div>
