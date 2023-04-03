@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Divider } from 'antd';
 import { FaRegComments } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi';
+
+import { customTime } from '../../utils/customTime';
+
 import './postCard.scss';
 
 const PostCard = ({ post }) => {
@@ -14,7 +17,7 @@ const PostCard = ({ post }) => {
                 <h3 className="post-card__title">
                     <Link to={`/${post.slug}`}>{post.title}</Link>
                 </h3>
-                <span>{post.created_at}</span>
+                <span>{post.created_at ? customTime(post.created_at) : 'unknown'}</span>
                 <br />
                 <span>Raymond Chen</span>
                 <p className="post-card__description">{post.sumary}</p>
