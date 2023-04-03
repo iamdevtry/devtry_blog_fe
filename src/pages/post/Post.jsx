@@ -45,9 +45,9 @@ const Post = () => {
                     setLoading(false);
                 });
         };
+
         getPost();
     }, [slug]);
-
     return (
         <div className="post">
             <div className="container" style={{ padding: '20px 15px' }}>
@@ -89,15 +89,11 @@ const Post = () => {
                             <div className="post__tags">
                                 <h3>Tags: </h3>
                                 <ul className="post__tags-list">
-                                    <li className="post__tags-item">
-                                        <Link to="/tags/nuget">NuGet</Link>
-                                    </li>
-                                    <li className="post__tags-item">
-                                        <Link to="/tags/nuget-org">NuGet.org</Link>
-                                    </li>
-                                    <li className="post__tags-item">
-                                        <Link to="/tags/nuget-client">NuGet Client</Link>
-                                    </li>
+                                    {data?.tags?.map((tag) => (
+                                        <li key={tag.id} className="post__tags-item">
+                                            <Link to={`/tags/${tag.slug}`}>{tag.title}</Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </Row>

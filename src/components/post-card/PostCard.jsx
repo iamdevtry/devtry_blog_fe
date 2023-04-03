@@ -3,7 +3,7 @@ import { Col, Row, Divider } from 'antd';
 import { FaRegComments } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi';
 import './postCard.scss';
-const tags = ['Windows', 'Mac', 'Linux', 'Android', 'iOS', 'Windows Phone'];
+
 const PostCard = ({ post }) => {
     return (
         <Row className="post-card">
@@ -23,10 +23,10 @@ const PostCard = ({ post }) => {
             <Col span={24} className="post-card__footer">
                 <div className="post-card__more">
                     <span className="post-card__tags">
-                        {tags.map((tag, index) => (
+                        {post?.tags.map((tag, index) => (
                             <div className="post-card__tag" key={index}>
-                                <Link key={index} to={`/tag/${tag}`}>
-                                    {tag}
+                                <Link key={index} to={`/tag/${tag.slug}`}>
+                                    {tag.title}
                                 </Link>
                             </div>
                         ))}
