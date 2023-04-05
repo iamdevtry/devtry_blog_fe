@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Upload from 'rc-upload';
 import { Image, Button, Typography, Spin } from 'antd';
@@ -77,13 +77,15 @@ const antIcon = (
         spin
     />
 );
-const UploadImage = () => {
+const UploadImage = (props) => {
+    const { defaultImage, onSuccess } = props;
     const [imageUploaded, setImageUploaded] = React.useState(null);
     const [uploadError, setUploadError] = React.useState(null);
     const [uploading, setUploading] = React.useState(false);
 
     const handleUploadSuccess = (res) => {
         setImageUploaded(res.data);
+        onSuccess(res.data);
     };
 
     const handleUploadError = (err) => {
@@ -111,11 +113,16 @@ const UploadImage = () => {
         setImageUploaded(null);
     };
 
+    useEffect(() => {
+        if (defaultImage) {
+            setImageUploaded(defaultImage);
+        }
+    }, [defaultImage]);
+
     return (
         <div className="custom-upload-image">
             <div>
                 <Spin indicator={antIcon} spinning={uploading} />
-
                 {!imageUploaded ? (
                     <Upload
                         {...uploadProps}

@@ -61,14 +61,10 @@ const options = {
     theme: 'snow',
 };
 
-const Editor = ({ onContentChange }) => {
-    // const handleContentChange = (e) => {
-    //     console.log(e);
-    // };
-
+const Editor = ({ onContentChange, data }) => {
     return (
         <div className="text-editor">
-            <ReactQuill {...options} onChange={onContentChange}></ReactQuill>
+            <ReactQuill value={data} {...options} onChange={onContentChange}></ReactQuill>
         </div>
     );
 };

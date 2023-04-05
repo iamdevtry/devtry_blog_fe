@@ -25,7 +25,7 @@ const columns = [
         key: 'action',
         render: (_, record) => (
             <Space size="middle">
-                <Link to={'#'}>
+                <Link to={`/admin/edit-post/${record.id}`}>
                     Edit
                     <EditTwoTone style={{ marginLeft: '4px' }} />
                 </Link>
