@@ -41,17 +41,6 @@ const tailFormItemLayout = {
     },
 };
 
-const options = [];
-for (let i = 10; i < 36; i++) {
-    options.push({
-        value: i.toString(36) + i,
-        label: i.toString(36) + i,
-    });
-}
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
-
 const EditPost = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
@@ -60,6 +49,19 @@ const EditPost = () => {
 
     const [content, setContent] = useState(null);
     const [thumbnail, setThumbnail] = useState(null);
+    const [tags, setTags] = useState([]);
+    const [deletedTags, setDeletedTags] = useState([]);
+    const filterTagsExist = (allTags, existTags) => {
+        let result = [];
+        allTags.forEach((item) => {
+            let isExist = existTags.find((tag) => tag.id === item.id);
+            if (isExist) {
+                result.push(isExist.title);
+            }
+        });
+        return result;
+    };
+
     useEffect(() => {
         const getPostDetail = async () => {
             devtryBlogApi
@@ -75,6 +77,7 @@ const EditPost = () => {
                     });
                     setContent(res.data.content);
                     setThumbnail(res.data.thumbnail);
+                    setTags(res.data.tags);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -103,6 +106,23 @@ const EditPost = () => {
         }
     }, [id]);
 
+    useEffect(() => {
+        const getTags = async () => {
+            devtryBlogApi
+                .getTags()
+                .then((res) => {
+                    form.setFieldsValue({
+                        tags: filterTagsExist(res.data, tags),
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
+        getTags();
+    }, [tags]);
+
     const update = async (values) => {
         await devtryBlogApi
             .updatePost(id, values)
@@ -122,7 +142,8 @@ const EditPost = () => {
         values.content = content;
         values.thumbnail = thumbnail;
         console.log('Received values of form: ', values);
-        update(values);
+        console.log(deletedTags);
+        // update(values);
     };
 
     const onContentChange = (e) => {
@@ -138,6 +159,14 @@ const EditPost = () => {
 
     const onUploadImageChange = (e) => {
         setThumbnail(e);
+    };
+
+    const handleDeselectTags = (value) => {
+        console.log('deselect', value);
+        setDeletedTags([...deletedTags, value]);
+    };
+    const handleTagsChange = (value) => {
+        console.log(`selected ${value}`);
     };
 
     return (
@@ -244,9 +273,11 @@ const EditPost = () => {
                                     style={{
                                         width: '100%',
                                     }}
-                                    onChange={handleChange}
+                                    onChange={handleTagsChange}
                                     tokenSeparators={[',']}
-                                    options={options}
+                                    options={tags}
+                                    fieldNames={{ label: 'title', value: 'slug' }}
+                                    onDeselect={(value) => handleDeselectTags(value)}
                                 />
                             </Form.Item>
                         </Panel>

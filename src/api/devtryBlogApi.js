@@ -58,5 +58,9 @@ const devtryBlogApi = {
         const url = '/categories';
         return axiosClient.get(url);
     },
+    getTags: () => {
+        const url = '/tags';
+        return axiosClient.get(url);
+    },
 };
 export default devtryBlogApi;
