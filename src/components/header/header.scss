@@ -112,4 +112,12 @@
             }
         }
     }
+
+    &__right {
+        height: 100%;
+        padding: 12px 0;
+        &--buy-me-a-coffee {
+            max-height: 100%;
+        }
+    }
 }

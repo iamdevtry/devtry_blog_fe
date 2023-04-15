@@ -107,9 +107,17 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="header__right">
-                    <h3>
-                        Buys me a beer <FaBeer />?
-                    </h3>
+                    <Link
+                        to="https://www.buymeacoffee.com/devtry"
+                        target="_blank"
+                        style={{ height: '100%' }}
+                    >
+                        <img
+                            className="header__right--buy-me-a-coffee"
+                            src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png"
+                            alt="Buy Me A Coffee"
+                        />
+                    </Link>
                 </div>
             </div>
         </div>
