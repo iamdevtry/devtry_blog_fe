@@ -14,6 +14,7 @@ import EditPost from '../pages/admin/post/EditPost';
 import LoginAdmin from '../pages/admin/login/LoginAdmin';
 import ListPost from '../pages/admin/post/ListPost';
 import ListCategory from '../pages/admin/category/ListCategory';
+import CreateCategory from '../pages/admin/category/CreateCategory';
 
 const RouteConfig = () => {
     return (
@@ -36,6 +37,7 @@ const RouteConfig = () => {
                     <Route path="edit-post/:id" element={<EditPost />} />
                     <Route path="list-post" element={<ListPost />} />
                     <Route path="list-cat" element={<ListCategory />} />
+                    <Route path="add-cat" element={<CreateCategory />} />
                     {/* <Route path="home" element={<Home />} />
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
