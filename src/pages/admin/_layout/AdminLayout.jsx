@@ -28,8 +28,10 @@ const items = [
         getItem(<Link to={`add-post`}>New post</Link>, '3', <FileAddOutlined />),
         getItem(<Link to={`list-post`}>All post</Link>, '4', <FileOutlined />),
     ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
+    getItem('Category', 'sub2', <FileSearchOutlined />, [
+        getItem(<Link to={`add-post`}>New Category</Link>, '5', <FileAddOutlined />),
+        getItem(<Link to={`list-cat`}>All Categories</Link>, '6', <FileOutlined />),
+    ]),
 ];
 const App = () => {
     let { pathname } = useLocation();
