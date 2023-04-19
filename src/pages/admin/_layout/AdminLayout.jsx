@@ -32,6 +32,10 @@ const items = [
         getItem(<Link to={`add-cat`}>New Category</Link>, '5', <FileAddOutlined />),
         getItem(<Link to={`list-cat`}>All Categories</Link>, '6', <FileOutlined />),
     ]),
+    getItem('Tag', 'sub3', <FileSearchOutlined />, [
+        getItem(<Link to={`add-tag`}>New Tag</Link>, '7', <FileAddOutlined />),
+        getItem(<Link to={`list-tag`}>All Tags</Link>, '8', <FileOutlined />),
+    ]),
 ];
 const App = () => {
     let { pathname } = useLocation();

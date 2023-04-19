@@ -15,6 +15,8 @@ import LoginAdmin from '../pages/admin/login/LoginAdmin';
 import ListPost from '../pages/admin/post/ListPost';
 import ListCategory from '../pages/admin/category/ListCategory';
 import CreateCategory from '../pages/admin/category/CreateCategory';
+import ListTag from '../pages/admin/tag/ListTag';
+import CreateTag from '../pages/admin/tag/CreateTag';
 
 const RouteConfig = () => {
     return (
@@ -38,6 +40,8 @@ const RouteConfig = () => {
                     <Route path="list-post" element={<ListPost />} />
                     <Route path="list-cat" element={<ListCategory />} />
                     <Route path="add-cat" element={<CreateCategory />} />
+                    <Route path="list-tag" element={<ListTag />} />
+                    <Route path="add-tag" element={<CreateTag />} />
                     {/* <Route path="home" element={<Home />} />
                     <Route path="categories" element={<Category />} />
                     <Route path="about" element={<About />} />
