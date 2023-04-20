@@ -59,10 +59,10 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer__copyright container">
-                <p>© 2021 All rights reserved</p>
+                <p>© 2023 All rights reserved</p>
                 <p>“ Knowledge is power 💡 ”</p>
                 <Link>
-                    <AiFillHeart /> iamdevtry.net
+                    <AiFillHeart /> devtry.net
                 </Link>
             </div>
         </footer>

@@ -8,7 +8,7 @@ import logo from '../../assets/images/go-logo.svg';
 
 const headerNav = [
     {
-        display: 'Trang chủ',
+        display: 'Home',
         path: '/',
     },
     // {

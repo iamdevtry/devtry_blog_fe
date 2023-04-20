@@ -1,4 +1,4 @@
-import { Col, Row, Card, Descriptions, Timeline } from 'antd';
+import { Col, Row, Card, Descriptions, Timeline, Image, Divider } from 'antd';
 import {
     MailOutlined,
     GithubOutlined,
@@ -7,12 +7,16 @@ import {
 } from '@ant-design/icons';
 import Breadcum from '../../components/breadcum/Breadcum';
 
+import profileImage from '../../assets/images/profile_image.webp';
+import aboutImage1 from '../../assets/images/about_image_1.webp';
+import aboutImage2 from '../../assets/images/about_image_2.webp';
+
 const About = () => {
     return (
         <div className="about">
             <Breadcum
                 title={'About'}
-                description={'The official blog for Microsoft developers.'}
+                description={'Something about my blog and me.'}
                 navigation={'Home > Blogs > About'}
             />
             <div className="container" style={{ padding: '20px 15px' }}>
@@ -21,124 +25,83 @@ const About = () => {
                         <Card>
                             <Descriptions title="About blog">
                                 <Descriptions.Item>
-                                    Walter Hartwell "Walt" White Sr., also known by his clandestine
-                                    pseudonym and business moniker Heisenberg and also frequently
-                                    referred to as Mr. White, is an American former chemist and
-                                    major narcotics distributor from Albuquerque, New Mexico, whose
-                                    drug empire became the largest meth operation in American
-                                    history, surpassing both Gustavo Fring's drug empire and the
-                                    Cartel's. Before entering the drug trade, Walt was a respected
-                                    chemist and scientist who later worked as an overqualified high
-                                    school chemistry teacher at J. P. Wynne High School alongside
-                                    working at the A1A Car Wash to financially support his family
-                                    (his wife Skyler, son Walt Jr., and infant daughter Holly).
-                                    After being diagnosed with terminal lung cancer, Walt started
-                                    manufacturing chemically pure crystal methamphetamine to provide
-                                    for his family upon his death. Knowing nothing about the drug
-                                    trade, Walt enlisted the aid of his former student, Jesse
-                                    Pinkman, to sell the meth he produced.
+                                    Welcome to my blog, where I share my passion for technology and
+                                    development. This blog is dedicated to providing useful
+                                    resources, tips, and insights to help you navigate the
+                                    ever-changing world of technology and software development. As a
+                                    developer myself, I understand the challenges and opportunities
+                                    that come with building new applications, websites, and
+                                    software. Through this blog, I aim to provide valuable
+                                    information and guidance to fellow developers and tech
+                                    enthusiasts, from beginner to expert. My goal is to make
+                                    technology accessible to everyone, regardless of their level of
+                                    experience. Whether you're just starting out or looking to level
+                                    up your skills, this blog has something for you. From tutorials
+                                    and how-to guides to in-depth analysis of the latest trends and
+                                    technologies, you'll find a wealth of knowledge here. Above all,
+                                    I believe in the power of community and collaboration. I welcome
+                                    your feedback, questions, and suggestions, and I look forward to
+                                    building a community of like-minded individuals who share my
+                                    passion for technology and development. Thank you for visiting
+                                    my blog, and I hope you find it helpful and informative.
                                 </Descriptions.Item>
                             </Descriptions>
                             <Descriptions title="About me">
                                 <Descriptions.Item>
-                                    Walt's scientific knowledge and dedication to quality lead him
-                                    to produce crystal meth that is purer and more potent than any
-                                    competitors'. To avoid the tedious collection of pseudoephedrine
-                                    required for production, Walt devises an alternative chemical
-                                    process utilizing methylamine, giving his product a distinctive
-                                    blue colour. His crystal meth, which is given the street name
-                                    "Blue Sky," dominates the market, leading to confrontations with
-                                    established drug makers and dealers. Although Walt and Jesse
-                                    began as amateur small-time meth cooks, manufacturing the drug
-                                    out of an RV in the deserts of New Mexico, and being met with
-                                    very limited success, Walt and Jesse soon climbed up the drug
-                                    hierarchy, killing or systematically destroying anyone who
-                                    impeded them. Because of his drug-related activities, Walt
-                                    eventually finds himself at odds with his family, the Drug
-                                    Enforcement Administration (DEA) through his brother-in-law and
-                                    accomplished DEA agent Hank Schrader, the local gangs, and the
-                                    Mexican drug cartels (including their regional distributors),
-                                    putting him and his family's lives at risk.
+                                    My name is Phong. I'm a Vietnamese 🇻🇳. I recently graduated from
+                                    Ho Chi Minh University of Technology with a degree in System
+                                    analysis and design. I am passionate about backend development
+                                    and have experience working with Go, NodeJs... I am excited to
+                                    learn more about backend development and interested in studying
+                                    low-level languages and systems. I also have a passion for
+                                    writing and sharing knowledge, so I built this blog. Here, I
+                                    only share my experience according to my personal knowledge and
+                                    the data I searched for, so it would be inevitable to avoid
+                                    misinformation. I am grateful if you help me and understand me.
+                                    Thank you all so much!
                                 </Descriptions.Item>
                             </Descriptions>
-                            <Descriptions title="Programing">
+                            <Descriptions title="Hobbies and  I don't know what I'm talking about">
                                 <Descriptions.Item>
-                                    Walt's scientific knowledge and dedication to quality lead him
-                                    to produce crystal meth that is purer and more potent than any
-                                    competitors'. To avoid the tedious collection of pseudoephedrine
-                                    required for production, Walt devises an alternative chemical
-                                    process utilizing methylamine, giving his product a distinctive
-                                    blue colour. His crystal meth, which is given the street name
-                                    "Blue Sky," dominates the market, leading to confrontations with
-                                    established drug makers and dealers. Although Walt and Jesse
-                                    began as amateur small-time meth cooks, manufacturing the drug
-                                    out of an RV in the deserts of New Mexico, and being met with
-                                    very limited success, Walt and Jesse soon climbed up the drug
-                                    hierarchy, killing or systematically destroying anyone who
-                                    impeded them. Because of his drug-related activities, Walt
-                                    eventually finds himself at odds with his family, the Drug
-                                    Enforcement Administration (DEA) through his brother-in-law and
-                                    accomplished DEA agent Hank Schrader, the local gangs, and the
-                                    Mexican drug cartels (including their regional distributors),
-                                    putting him and his family's lives at risk.
+                                    I’m glad you took the time to read this part. By the way, you
+                                    can understand a little more about my preferences. I like
+                                    learning new technology and programming languages in my free
+                                    time.  I also solve problems on Leetcode; it's very useful for
+                                    me. I’m also a very sporting person, I often play football with
+                                    my college friends. Sport is really helpful, it helps relieve
+                                    stress and refresh the mind. Aside from that, I am also
+                                    interested in in photography, listening to music, and reading,
+                                    especially when learning a foreign language. I wanna make
+                                    friends with people. all around the world. I can learn from them
+                                    about their culture, traditional...
+                                    <br />
+                                    In the final section, I just thought I'd put some pictures here
+                                    for no reason. 
                                 </Descriptions.Item>
                             </Descriptions>
-                            <Descriptions title="Career path">
-                                <Descriptions.Item>
-                                    Walt's scientific knowledge and dedication to quality lead him
-                                    to produce crystal meth that is purer and more potent than any
-                                    competitors'. To avoid the tedious collection of pseudoephedrine
-                                    required for production, Walt devises an alternative chemical
-                                    process utilizing methylamine, giving his product a distinctive
-                                    blue colour. His crystal meth, which is given the street name
-                                    "Blue Sky," dominates the market, leading to confrontations with
-                                    established drug makers and dealers. Although Walt and Jesse
-                                    began as amateur small-time meth cooks, manufacturing the drug
-                                    out of an RV in the deserts of New Mexico, and being met with
-                                    very limited success, Walt and Jesse soon climbed up the drug
-                                    hierarchy, killing or systematically destroying anyone who
-                                    impeded them. Because of his drug-related activities, Walt
-                                    eventually finds himself at odds with his family, the Drug
-                                    Enforcement Administration (DEA) through his brother-in-law and
-                                    accomplished DEA agent Hank Schrader, the local gangs, and the
-                                    Mexican drug cartels (including their regional distributors),
-                                    putting him and his family's lives at risk.
-                                </Descriptions.Item>
-                            </Descriptions>
-                            <Descriptions title="Activity">
-                                <Descriptions.Item>
-                                    Walt's scientific knowledge and dedication to quality lead him
-                                    to produce crystal meth that is purer and more potent than any
-                                    competitors'. To avoid the tedious collection of pseudoephedrine
-                                    required for production, Walt devises an alternative chemical
-                                    process utilizing methylamine, giving his product a distinctive
-                                    blue colour. His crystal meth, which is given the street name
-                                    "Blue Sky," dominates the market, leading to confrontations with
-                                    established drug makers and dealers. Although Walt and Jesse
-                                    began as amateur small-time meth cooks, manufacturing the drug
-                                    out of an RV in the deserts of New Mexico, and being met with
-                                    very limited success, Walt and Jesse soon climbed up the drug
-                                    hierarchy, killing or systematically destroying anyone who
-                                    impeded them. Because of his drug-related activities, Walt
-                                    eventually finds himself at odds with his family, the Drug
-                                    Enforcement Administration (DEA) through his brother-in-law and
-                                    accomplished DEA agent Hank Schrader, the local gangs, and the
-                                    Mexican drug cartels (including their regional distributors),
-                                    putting him and his family's lives at risk.
-                                </Descriptions.Item>
-                            </Descriptions>
+                            <Image.PreviewGroup
+                                preview={{
+                                    onChange: (current, prev) =>
+                                        console.log(
+                                            `current index: ${current}, prev index: ${prev}`
+                                        ),
+                                }}
+                            >
+                                <Image
+                                    width={'100%'}
+                                    src={aboutImage1}
+                                    style={{ marginBottom: '1rem' }}
+                                />
+                                <Image
+                                    width={'100%'}
+                                    src={aboutImage2}
+                                    style={{ marginBottom: '1rem' }}
+                                />
+                            </Image.PreviewGroup>
                         </Card>
                     </Col>
                     <Col lg={7} md={7} xs={24}>
-                        <Card
-                            hoverable
-                            cover={
-                                <img
-                                    alt="example"
-                                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                                />
-                            }
-                        >
+                        <Card hoverable cover={<img alt="devtry.net" src={profileImage} />}>
                             <Descriptions title="Personal Info" column={1}>
                                 <Descriptions.Item label="Full name">
                                     Phong Binh Tran
