@@ -34,8 +34,8 @@ const Tag = () => {
         <div className="category">
             <Breadcum
                 title={'Tags'}
-                description={'The official blog for Microsoft developers.'}
-                navigation={'Home > Blogs > Tags'}
+                description={'The official blog for developers and coders.'}
+                navigation={'Home > Tags'}
             />
             <div className="container" style={{ padding: '20px 15px' }}>
                 <Row gutter={24}>

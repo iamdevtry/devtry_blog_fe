@@ -17,7 +17,7 @@ const About = () => {
             <Breadcum
                 title={'About'}
                 description={'Something about my blog and me.'}
-                navigation={'Home > Blogs > About'}
+                navigation={'Home > About'}
             />
             <div className="container" style={{ padding: '20px 15px' }}>
                 <Row gutter={24}>

@@ -43,9 +43,9 @@ const Home = () => {
     return (
         <div className="home">
             <Breadcum
-                title={'Microsoft Developer Blogs'}
-                description={'The official blog for Microsoft developers.'}
-                navigation={'Home > Blogs > Microsoft Developer Blogs'}
+                title={`A Developer's Blog`}
+                description={'The official blog for developers and coders.'}
+                navigation={'Home'}
             />
             <div className="container" style={{ padding: '20px 15px' }}>
                 <Row gutter={24}>
