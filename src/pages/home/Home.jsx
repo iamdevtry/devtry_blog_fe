@@ -6,6 +6,7 @@ import PostCard from '../../components/post-card/PostCard';
 import WidgetList from '../../components/widget-list/WidgetList';
 
 import devtryBlogApi from '../../api/devtryBlogApi';
+import { Helmet } from 'react-helmet';
 
 const categories = [
     'All',
@@ -42,6 +43,11 @@ const Home = () => {
 
     return (
         <div className="home">
+            <Helmet>
+                <title>Homepage | Devtry Blog</title>
+                <meta name="description" content="" />
+                <meta name="keywords" content="Devtry.net Devry.net" />
+            </Helmet>
             <Breadcum
                 title={`A Developer's Blog`}
                 description={'The official blog for developers and coders.'}

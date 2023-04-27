@@ -11,9 +11,13 @@ import profileImage from '../../assets/images/profile_image.webp';
 import aboutImage1 from '../../assets/images/about_image_1.webp';
 import aboutImage2 from '../../assets/images/about_image_2.webp';
 
+import { Helmet } from 'react-helmet';
 const About = () => {
     return (
         <div className="about">
+            <Helmet>
+                <title>About | Devtry Blog</title>
+            </Helmet>
             <Breadcum
                 title={'About'}
                 description={'Something about my blog and me.'}

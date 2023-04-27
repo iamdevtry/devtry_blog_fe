@@ -6,7 +6,7 @@ import Breadcum from '../../components/breadcum/Breadcum';
 import PostCard from '../../components/post-card/PostCard';
 
 import devtryBlogApi from '../../api/devtryBlogApi';
-
+import { Helmet } from 'react-helmet';
 const Tag = () => {
     let { id } = useParams();
 
@@ -32,6 +32,11 @@ const Tag = () => {
 
     return (
         <div className="category">
+            <Helmet>
+                <title>Tag | Devtry Blog</title>
+                <meta name="description" content="" />
+                <meta name="keywords" content="Devtry.net Devry.net" />
+            </Helmet>
             <Breadcum
                 title={'Tags'}
                 description={'The official blog for developers and coders.'}

@@ -10,7 +10,7 @@ import Content from '../../components/content/Content';
 
 import { BiLike } from 'react-icons/bi';
 import { FaRegComments } from 'react-icons/fa';
-
+import { Helmet } from 'react-helmet';
 import devtryBlogApi from '../../api/devtryBlogApi';
 import './post.scss';
 
@@ -71,6 +71,11 @@ const Post = () => {
 
     return (
         <div className="post">
+            <Helmet>
+                <title>{data?.title} | Devtry Blog</title>
+                <meta name="description" content="" />
+                <meta name="keywords" content="Devtry.net Devry.net" />
+            </Helmet>
             <div className="container" style={{ padding: '20px 15px' }}>
                 {loading ? (
                     <Spin style={{ marginTop: '2rem' }} tip="Loading">
