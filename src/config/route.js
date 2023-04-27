@@ -35,6 +35,7 @@ const RouteConfig = () => {
                     <Route path="/:slug" element={<Post />} />
                     <Route path="login" element={<LoginAdmin />} />
                 </Route>
+
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="add-post" element={<CreatePost />} />

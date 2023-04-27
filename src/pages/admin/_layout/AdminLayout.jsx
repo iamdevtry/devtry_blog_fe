@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
 import {
     DesktopOutlined,
     TeamOutlined,
@@ -43,7 +43,12 @@ const App = () => {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
-    return (
+
+    const token = localStorage.getItem('user');
+
+    return !token ? (
+        <Navigate to="/login" />
+    ) : (
         <Layout
             style={{
                 minHeight: '100vh',
