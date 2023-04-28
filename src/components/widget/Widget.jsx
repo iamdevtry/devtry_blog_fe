@@ -1,7 +1,26 @@
 import { Link } from 'react-router-dom';
 import './widget.scss';
+import { useEffect, useState } from 'react';
 
 const Widget = ({ title, categories }) => {
+    const [prefix, setPrefix] = useState('');
+    useEffect(() => {
+        switch (title) {
+            case 'Categories':
+                setPrefix('categories');
+                break;
+            case 'Tags':
+                setPrefix('tags');
+                break;
+            case 'Popular Posts':
+                setPrefix('post');
+                break;
+            default:
+                setPrefix('');
+                break;
+        }
+    }, [title]);
+
     return (
         <div className="widget">
             <div className="widget__title">
@@ -11,7 +30,7 @@ const Widget = ({ title, categories }) => {
                 <ul className="widget__categories">
                     {categories.map((category, index) => (
                         <li key={index} className="widget__category">
-                            <Link>{category.title}</Link>
+                            <Link to={`${prefix}/${category.slug}`}>{category.title}</Link>
                         </li>
                     ))}
                 </ul>
