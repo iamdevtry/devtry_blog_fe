@@ -17,16 +17,16 @@ const Footer = () => {
                 <div className="footer__links">
                     <ul>
                         <li>
-                            <Link>Home</Link>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link>About</Link>
+                            <Link to="/about">About</Link>
                         </li>
                         <li>
-                            <Link>Services</Link>
+                            <Link to="/faq">FAQ</Link>
                         </li>
                         <li>
-                            <Link>Contact</Link>
+                            <Link to="/policy">Policy</Link>
                         </li>
                     </ul>
                 </div>
@@ -36,22 +36,22 @@ const Footer = () => {
                 <div className="footer__social">
                     <ul>
                         <li>
-                            <Link>
+                            <Link to="https://www.facebook.com/phongtrollisdabest/">
                                 <AiFillFacebook /> Facebook
                             </Link>
                         </li>
                         <li>
-                            <Link>
+                            <Link to="https://github.com/iamdevtry">
                                 <AiFillGithub /> Github
                             </Link>
                         </li>
                         <li>
-                            <Link>
+                            <Link to="https://www.instagram.com/phongtroll">
                                 <AiFillInstagram /> Instagram
                             </Link>
                         </li>
                         <li>
-                            <Link>
+                            <Link to="https://www.linkedin.com/in/iamdevtry/">
                                 <AiFillLinkedin /> LinkedIn
                             </Link>
                         </li>
@@ -60,7 +60,6 @@ const Footer = () => {
             </div>
             <div className="footer__copyright container">
                 <p>© 2023 All rights reserved</p>
-                <p>“ Knowledge is power 💡 ”</p>
                 <Link>
                     <AiFillHeart /> devtry.net
                 </Link>
