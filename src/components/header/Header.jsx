@@ -6,41 +6,9 @@ import { FaBeer, FaChevronDown } from 'react-icons/fa';
 import './header.scss';
 import logo from '../../assets/images/go-logo.svg';
 
-const headerNav = [
-    {
-        display: 'Home',
-        path: '/',
-    },
-    // {
-    //     display: 'Blog',
-    //     path: '/blog',
-    // },
-    {
-        display: 'Categories',
-        path: '#',
-        chilldren: [
-            {
-                display: 'Category 1',
-                path: '1st-category',
-            },
-            {
-                display: 'Category 2',
-                path: '2st-category',
-            },
-            {
-                display: 'Category 3',
-                path: '3st-category',
-            },
-        ],
-    },
-    {
-        display: 'About me',
-        path: '/about',
-    },
-];
+import { headerNav } from '../../utils/handleMenu';
 const Header = () => {
     const { pathname } = useLocation();
-
     const ref = useRef();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -73,10 +41,10 @@ const Header = () => {
                         {headerNav.map((item, index) => (
                             <li key={index} className={`${index === active ? 'active' : ''}`}>
                                 <Link
-                                    to={item.path}
+                                    to={item.slug}
                                     style={{ alignItems: 'center', display: 'flex' }}
                                 >
-                                    {item.display}
+                                    {item.title}
                                     {item.chilldren && (
                                         <FaChevronDown
                                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -95,8 +63,8 @@ const Header = () => {
                                     >
                                         {item.chilldren.map((child, index) => (
                                             <li key={index}>
-                                                <Link to={`categories/${child.path}`}>
-                                                    {child.display}
+                                                <Link to={`categories/${child.slug}`}>
+                                                    {child.title}
                                                 </Link>
                                             </li>
                                         ))}
