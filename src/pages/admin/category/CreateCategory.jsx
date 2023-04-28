@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Col, Form, Input, Row, Select, Collapse, Modal } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 
-import Editor from '../../../components/editor/Editor';
-import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
 import devtryBlogApi from '../../../api/devtryBlogApi';
 
@@ -72,7 +70,7 @@ const handleChange = (value) => {
 
 const CreateCategory = () => {
     const [form] = Form.useForm();
-
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
 
     // const [parentPosts, setParentPosts] = useState([]);
@@ -118,11 +116,19 @@ const CreateCategory = () => {
         }
     }, []);
 
-    const addPost = async (values) => {
+    const addCategory = async (values) => {
         await devtryBlogApi
-            .addPost(values)
+            .addCategory(values)
             .then((res) => {
                 console.log(res);
+                Modal.success({
+                    title: 'Add category successfully',
+                    content: res.data,
+                });
+
+                setTimeout(() => {
+                    navigate('/admin/list-cat');
+                }, 2000);
             })
             .catch((err) => {
                 console.log(err.response.data);
@@ -134,8 +140,8 @@ const CreateCategory = () => {
     };
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        // addPost(values);
+        // console.log('Received values of form: ', values);
+        addCategory(values);
     };
 
     const handleTitleChange = (e) => {

@@ -58,6 +58,12 @@ const devtryBlogApi = {
         const url = '/categories';
         return axiosClient.get(url);
     },
+    addCategory: (category) => {
+        const url = '/categories';
+        return axiosClient.post(url, category, {
+            headers: authHeader(),
+        });
+    },
     getTags: () => {
         const url = '/tags';
         return axiosClient.get(url);
