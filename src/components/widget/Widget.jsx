@@ -30,7 +30,13 @@ const Widget = ({ title, categories }) => {
                 <ul className="widget__categories">
                     {categories.map((category, index) => (
                         <li key={index} className="widget__category">
-                            <Link to={`${prefix}/${category.slug}`}>{category.title}</Link>
+                            <Link
+                                to={`${prefix}/${category.slug}/${
+                                    prefix == 'tags' ? category.id : ''
+                                }`}
+                            >
+                                {category.title}
+                            </Link>
                         </li>
                     ))}
                 </ul>

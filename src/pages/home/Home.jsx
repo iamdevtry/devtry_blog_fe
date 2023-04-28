@@ -33,6 +33,7 @@ const Home = () => {
             .getCategories()
             .then((res) => {
                 setCategories(res.data);
+                localStorage.removeItem('categories');
                 localStorage.setItem('categories', JSON.stringify(res.data));
                 setLoading(false);
             })
@@ -47,6 +48,7 @@ const Home = () => {
             .getTags()
             .then((res) => {
                 setTags(res.data);
+                localStorage.removeItem('tags');
                 localStorage.setItem('tags', JSON.stringify(res.data));
                 setLoading(false);
             })
@@ -57,17 +59,10 @@ const Home = () => {
 
     useEffect(() => {
         getListPost();
-        if (localStorage.getItem('categories') && localStorage.getItem('categories').length > 0) {
-            setCategories(JSON.parse(localStorage.getItem('categories')));
-        } else {
-            getCategories();
-        }
 
-        if (localStorage.getItem('tags') && localStorage.getItem('tags').length > 0) {
-            setTags(JSON.parse(localStorage.getItem('tags')));
-        } else {
-            getTags();
-        }
+        getCategories();
+
+        getTags();
     }, []);
 
     return (
