@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Form, Input, Row, Select, Collapse, Modal } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { Button, Col, Form, Input, Row, Spin, Modal } from 'antd';
 
-import Editor from '../../../components/editor/Editor';
-import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
 import devtryBlogApi from '../../../api/devtryBlogApi';
 
-const { Option } = Select;
-const { Panel } = Collapse;
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -40,89 +36,25 @@ const tailFormItemLayout = {
     },
 };
 
-const options = [];
-for (let i = 10; i < 36; i++) {
-    options.push({
-        value: i.toString(36) + i,
-        label: i.toString(36) + i,
-    });
-}
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
-
-// const handleParentPostChange = (value) => {
-//     console.log(`selected ${value}`);
-// };
-
-// const parentPostExample = [
-//     {
-//         label: 'https://www.google.com',
-//         value: 'id1',
-//     },
-//     {
-//         label: 'https://www.google.org',
-//         value: 'id2',
-//     },
-//     {
-//         label: 'https://www.google.net',
-//         value: 'id3',
-//     },
-// ];
-
 const CreateTag = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
 
-    const [categories, setCategories] = useState([]);
-
-    // const [parentPosts, setParentPosts] = useState([]);
-    // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-    // const onParentPostChange = (value) => {
-    //     if (!value) {
-    //         setAutoCompleteResult([]);
-    //     } else {
-    //         const postParents = parentPosts.filter((post) => post.label.includes(value));
-    //         setAutoCompleteResult(postParents.map((post) => `${post.label}`));
-    //     }
-    // };
-    // const parentPostOptions = autoCompleteResult.map((post) => ({
-    //     label: post,
-    //     value: post,
-    // }));
-
-    // const handleSearch = (value) => {
-    //     console.log(value);
-    //     setParentPosts(parentPostExample);
-    // };
-
-    useEffect(() => {
-        const getCategories = async () => {
-            devtryBlogApi
-                .getCategories()
-                .then((res) => {
-                    console.log('call api');
-                    setCategories(res.data);
-                    localStorage.setItem('categories', JSON.stringify(res.data));
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-
-        const categoriesLocal = localStorage.getItem('categories');
-        if (categoriesLocal) {
-            setCategories(JSON.parse(categoriesLocal));
-        } else {
-            getCategories();
-        }
-    }, []);
-
-    const addPost = async (values) => {
-        await devtryBlogApi
-            .addPost(values)
+    const addTag = async (values) => {
+        setLoading(true);
+        devtryBlogApi
+            .addTag(values)
             .then((res) => {
                 console.log(res);
+                Modal.success({
+                    title: 'Add tag successfully',
+                    content: res.data,
+                });
+                setTimeout(() => {
+                    navigate('/admin/list-cat');
+                }, 2000);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err.response.data);
@@ -130,12 +62,13 @@ const CreateTag = () => {
                     title: err.response.data.message,
                     content: err.response.data.log,
                 });
+                setLoading(false);
             });
     };
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        // addPost(values);
+        // console.log('Received values of form: ', values);
+        addTag(values);
     };
 
     const handleTitleChange = (e) => {
@@ -169,23 +102,6 @@ const CreateTag = () => {
                     >
                         <Input.TextArea onChange={handleTitleChange} showCount maxLength={75} />
                     </Form.Item>
-                    <Form.Item name="meta_title" label="Meta Title">
-                        <Input.TextArea showCount maxLength={100} />
-                    </Form.Item>
-
-                    <Form.Item name="content" label="Content">
-                        <Input.TextArea showCount maxLength={100} />
-                    </Form.Item>
-
-                    <Form.Item name="parent_id" label="Parent Category">
-                        <Select placeholder="select your parent category">
-                            {categories?.map((cat) => (
-                                <Option key={cat.id} value={cat.id}>
-                                    {cat.title}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
                     <Form.Item
                         name="slug"
                         label="Slug"
@@ -199,9 +115,15 @@ const CreateTag = () => {
                         <Input.TextArea showCount maxLength={100} />
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">
-                            Add Category
-                        </Button>
+                        {loading ? (
+                            <Spin style={{ marginTop: '2rem' }} tip="Loading">
+                                <div className="content" />
+                            </Spin>
+                        ) : (
+                            <Button type="primary" htmlType="submit">
+                                Add Tag
+                            </Button>
+                        )}
                     </Form.Item>
                 </Col>
             </Row>

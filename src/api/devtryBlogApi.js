@@ -68,5 +68,11 @@ const devtryBlogApi = {
         const url = '/tags';
         return axiosClient.get(url);
     },
+    addTag: (tag) => {
+        const url = '/tags';
+        return axiosClient.post(url, tag, {
+            headers: authHeader(),
+        });
+    },
 };
 export default devtryBlogApi;
