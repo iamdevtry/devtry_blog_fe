@@ -11,7 +11,7 @@ const Widget = ({ title, categories }) => {
                 <ul className="widget__categories">
                     {categories.map((category, index) => (
                         <li key={index} className="widget__category">
-                            <Link>{category}</Link>
+                            <Link>{category.title}</Link>
                         </li>
                     ))}
                 </ul>

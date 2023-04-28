@@ -8,21 +8,11 @@ import WidgetList from '../../components/widget-list/WidgetList';
 import devtryBlogApi from '../../api/devtryBlogApi';
 import { Helmet } from 'react-helmet';
 
-const categories = [
-    'All',
-    'Azure',
-    'C#',
-    'C++',
-    'Cloud',
-    'Dynamics 365',
-    'Education',
-    'Events',
-    'Gaming',
-];
-
 const Home = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
 
     const getListPost = () => {
         setLoading(true);
@@ -37,8 +27,47 @@ const Home = () => {
             });
     };
 
+    const getCategories = () => {
+        setLoading(true);
+        devtryBlogApi
+            .getCategories()
+            .then((res) => {
+                setCategories(res.data);
+                localStorage.setItem('categories', JSON.stringify(res.data));
+                setLoading(false);
+            })
+            .catch((err) => {
+                setLoading(false);
+            });
+    };
+
+    const getTags = () => {
+        setLoading(true);
+        devtryBlogApi
+            .getTags()
+            .then((res) => {
+                setTags(res.data);
+                localStorage.setItem('tags', JSON.stringify(res.data));
+                setLoading(false);
+            })
+            .catch((err) => {
+                setLoading(false);
+            });
+    };
+
     useEffect(() => {
         getListPost();
+        if (localStorage.getItem('categories') && localStorage.getItem('categories').length > 0) {
+            setCategories(JSON.parse(localStorage.getItem('categories')));
+        } else {
+            getCategories();
+        }
+
+        if (localStorage.getItem('tags') && localStorage.getItem('tags').length > 0) {
+            setTags(JSON.parse(localStorage.getItem('tags')));
+        } else {
+            getTags();
+        }
     }, []);
 
     return (
@@ -72,11 +101,11 @@ const Home = () => {
                                     categories: categories,
                                 },
                                 {
-                                    title: 'Categories',
-                                    categories: categories,
+                                    title: 'Tags',
+                                    categories: tags,
                                 },
                                 {
-                                    title: 'Categories',
+                                    title: 'Popular Posts',
                                     categories: categories,
                                 },
                             ]}
