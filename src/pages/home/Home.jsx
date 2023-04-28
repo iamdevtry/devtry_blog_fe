@@ -68,7 +68,7 @@ const Home = () => {
     return (
         <div className="home">
             <Helmet>
-                <title>Homepage | Devtry Blog</title>
+                <title>Blog for devs | Devtry Blog</title>
                 <meta name="description" content="" />
                 <meta name="keywords" content="Devtry.net Devry.net" />
             </Helmet>
