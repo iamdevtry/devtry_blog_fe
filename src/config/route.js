@@ -18,6 +18,7 @@ import CreateCategory from '../pages/admin/category/CreateCategory';
 import ListTag from '../pages/admin/tag/ListTag';
 import CreateTag from '../pages/admin/tag/CreateTag';
 import Policy from '../pages/policy/Policy';
+import NotFound from '../pages/notfound/NotFound';
 
 const RouteConfig = () => {
     return (
@@ -32,8 +33,9 @@ const RouteConfig = () => {
                     <Route path="about" element={<About />} />
                     <Route path="policy" element={<Policy />} />
                     {/* <Route path="posts" element={<Post />} /> */}
-                    <Route path="/:slug" element={<Post />} />
+                    <Route path="post/:slug" element={<Post />} />
                     <Route path="login" element={<LoginAdmin />} />
+                    <Route path="*" element={<NotFound />} />
                 </Route>
 
                 <Route path="/admin" element={<AdminLayout />}>
