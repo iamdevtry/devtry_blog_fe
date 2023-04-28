@@ -13,6 +13,7 @@ import { FaRegComments } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
 import devtryBlogApi from '../../api/devtryBlogApi';
 import './post.scss';
+import NotFound from '../notfound/NotFound';
 
 const categories = [
     'All',
@@ -69,7 +70,9 @@ const Post = () => {
         }
     }, [data]);
 
-    return (
+    return data ? (
+        <NotFound />
+    ) : (
         <div className="post">
             <Helmet>
                 <title>{data?.title} | Devtry Blog</title>
