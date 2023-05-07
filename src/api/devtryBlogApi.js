@@ -6,6 +6,10 @@ const devtryBlogApi = {
         const url = '/login';
         return axiosClient.post(url, params);
     },
+    register: async (params) => {
+        const url = '/register';
+        return axiosClient.post(url, params);
+    },
     addPost: (post) => {
         const url = '/posts';
         return axiosClient.post(url, post, {

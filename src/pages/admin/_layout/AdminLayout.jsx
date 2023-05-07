@@ -8,10 +8,10 @@ import {
     FileSearchOutlined,
     FileAddOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import { useState } from 'react';
 import Logo from '../../../assets/images/go-logo.svg';
-
+import AuthService from '../../../services/authService';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
@@ -21,6 +21,12 @@ function getItem(label, key, icon, children) {
         label,
     };
 }
+
+const handleLogout = () => {
+    AuthService.removeUser();
+    window.location.href = '/login';
+};
+
 const items = [
     getItem('Option 1', '1', <PieChartOutlined />),
     getItem('Option 2', '2', <DesktopOutlined />),
@@ -36,6 +42,7 @@ const items = [
         getItem(<Link to={`add-tag`}>New Tag</Link>, '7', <FileAddOutlined />),
         getItem(<Link to={`list-tag`}>All Tags</Link>, '8', <FileOutlined />),
     ]),
+    getItem(<Button onClick={handleLogout}>Logout</Button>, '9'),
 ];
 const App = () => {
     let { pathname } = useLocation();

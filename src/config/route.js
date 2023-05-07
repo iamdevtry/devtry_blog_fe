@@ -19,6 +19,7 @@ import ListTag from '../pages/admin/tag/ListTag';
 import CreateTag from '../pages/admin/tag/CreateTag';
 import Policy from '../pages/policy/Policy';
 import NotFound from '../pages/notfound/NotFound';
+import Register from '../pages/admin/register/Register';
 
 const RouteConfig = () => {
     return (
@@ -35,6 +36,7 @@ const RouteConfig = () => {
                     {/* <Route path="posts" element={<Post />} /> */}
                     <Route path="post/:slug" element={<Post />} />
                     <Route path="login" element={<LoginAdmin />} />
+                    <Route path="register" element={<Register />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
 

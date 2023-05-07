@@ -2,18 +2,15 @@ import { Button, Form, Input } from 'antd';
 
 import devtryBlogApi from '../../../api/devtryBlogApi';
 import AuthService from '../../../services/authService';
-import './loginAdmin.scss';
+import './register.scss';
 
-const LoginAdmin = () => {
-    const login = async (values) => {
+const Register = () => {
+    const register = async (values) => {
         await devtryBlogApi
-            .login(values)
+            .register(values)
             .then((res) => {
                 console.log('login success');
                 AuthService.setUser(res);
-                setTimeout(() => {
-                    window.location.href = '/admin';
-                }, 2000);
             })
             .catch((err) => {
                 console.log(err.response.data);
@@ -22,7 +19,7 @@ const LoginAdmin = () => {
 
     const onFinish = (values) => {
         // console.log('Success:', values);
-        login(values);
+        register(values);
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -77,6 +74,19 @@ const LoginAdmin = () => {
                     </Form.Item>
 
                     <Form.Item
+                        label="Mobile"
+                        name="mobile"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your mobile!',
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+
+                    <Form.Item
                         wrapperCol={{
                             offset: 8,
                             span: 16,
@@ -91,4 +101,4 @@ const LoginAdmin = () => {
         </div>
     );
 };
-export default LoginAdmin;
+export default Register;
