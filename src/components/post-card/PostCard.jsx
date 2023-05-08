@@ -9,6 +9,7 @@ import './postCard.scss';
 import noImage from '../../assets/images/svg/image-outline-icon.svg';
 
 const PostCard = ({ post }) => {
+    console.log(post);
     return (
         <Row className="post-card">
             <Col lg={8} md={8} xs={0} className="post-card__image">
