@@ -73,7 +73,6 @@ const Home = () => {
             .getPosts(page + 1)
             .then((res) => {
                 setLoading(false);
-                console.log(res.data);
                 if (res.data.length < 9) {
                     setDisableLoadMore(true);
                 }

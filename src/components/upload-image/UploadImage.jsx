@@ -9,7 +9,7 @@ import './upload-image.scss';
 const { Text } = Typography;
 
 const uploadProps = {
-    action: 'http://devtry.me/v1/upload',
+    action: 'https://devtry.me/v1/upload',
     multiple: false,
     data: { a: 1, b: 2 },
     headers: authHeader(),
