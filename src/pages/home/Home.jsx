@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, Row, Spin } from 'antd';
+import { Col, Row, Spin, Button } from 'antd';
 
 import Breadcum from '../../components/breadcum/Breadcum';
 import PostCard from '../../components/post-card/PostCard';
@@ -13,11 +13,12 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
-
-    const getListPost = () => {
+    const [page, setPage] = useState(1);
+    const [disableLoadMore, setDisableLoadMore] = useState(false);
+    const getListPost = (page) => {
         setLoading(true);
         devtryBlogApi
-            .getPosts()
+            .getPosts(page)
             .then((res) => {
                 setData(res.data);
                 setLoading(false);
@@ -65,6 +66,24 @@ const Home = () => {
         getTags();
     }, []);
 
+    const handleLoadMore = () => {
+        setPage(page + 1);
+        setLoading(true);
+        devtryBlogApi
+            .getPosts(page + 1)
+            .then((res) => {
+                setLoading(false);
+                console.log(res.data);
+                if (res.data.length < 9) {
+                    setDisableLoadMore(true);
+                }
+                setData([...data, ...res.data]);
+            })
+            .catch((err) => {
+                setLoading(false);
+            });
+    };
+
     return (
         <div className="home">
             <Helmet>
@@ -79,7 +98,7 @@ const Home = () => {
             />
             <div className="container" style={{ padding: '20px 15px' }}>
                 <Row gutter={24}>
-                    <Col lg={17} md={17} xs={24}>
+                    <Col lg={24} md={24} xs={24}>
                         {loading ? (
                             <Spin style={{ marginTop: '2rem' }} tip="Loading">
                                 <div className="content" />
@@ -88,7 +107,19 @@ const Home = () => {
                             data.map((item) => <PostCard key={item.id} post={item} />)
                         )}
                     </Col>
-                    <Col lg={7} md={7} xs={24}>
+                    {!disableLoadMore && (
+                        <Col
+                            lg={24}
+                            md={24}
+                            xs={24}
+                            style={{ display: 'flex', justifyContent: 'center' }}
+                        >
+                            <Button type="primary" shape="round" onClick={handleLoadMore}>
+                                Load more
+                            </Button>
+                        </Col>
+                    )}
+                    {/* <Col lg={7} md={7} xs={24}>
                         <WidgetList
                             widgets={[
                                 {
@@ -105,7 +136,7 @@ const Home = () => {
                                 },
                             ]}
                         />
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
         </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Input, Row, Select, Collapse, Modal } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-
+import { useNavigate } from 'react-router-dom';
 import Editor from '../../../components/editor/Editor';
 import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
@@ -51,62 +50,19 @@ const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 
-// const handleParentPostChange = (value) => {
-//     console.log(`selected ${value}`);
-// };
-
-// const parentPostExample = [
-//     {
-//         label: 'https://www.google.com',
-//         value: 'id1',
-//     },
-//     {
-//         label: 'https://www.google.org',
-//         value: 'id2',
-//     },
-//     {
-//         label: 'https://www.google.net',
-//         value: 'id3',
-//     },
-// ];
-
 const CreatePost = () => {
+    const navigate = useNavigate();
     const [form] = Form.useForm();
 
     const [categories, setCategories] = useState([]);
-
+    const [tags, setTags] = useState([]);
     const [content, setContent] = useState(null);
 
-    // const [parentPosts, setParentPosts] = useState([]);
-    // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-    // const onParentPostChange = (value) => {
-    //     if (!value) {
-    //         setAutoCompleteResult([]);
-    //     } else {
-    //         const postParents = parentPosts.filter((post) => post.label.includes(value));
-    //         setAutoCompleteResult(postParents.map((post) => `${post.label}`));
-    //     }
-    // };
-    // const parentPostOptions = autoCompleteResult.map((post) => ({
-    //     label: post,
-    //     value: post,
-    // }));
-
-    // const handleSearch = (value) => {
-    //     console.log(value);
-    //     setParentPosts(parentPostExample);
-    // };
-
-    let i = 0;
     useEffect(() => {
-        i++;
-        console.log(i);
         const getCategories = async () => {
             devtryBlogApi
                 .getCategories()
                 .then((res) => {
-                    console.log('call api');
                     setCategories(res.data);
                     localStorage.setItem('categories', JSON.stringify(res.data));
                 })
@@ -123,7 +79,44 @@ const CreatePost = () => {
         }
     }, []);
 
+    useEffect(() => {
+        const getTags = async () => {
+            devtryBlogApi
+                .getTags()
+                .then((res) => {
+                    setTags(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+
+        getTags();
+    }, []);
+
     const addPost = async (values) => {
+        await devtryBlogApi
+            .addPost(values)
+            .then((res) => {
+                Modal.success({
+                    title: 'Add post successfully',
+                    content: res.data,
+                });
+
+                setTimeout(() => {
+                    navigate('/admin/list-post');
+                }, 2000);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+                Modal.error({
+                    title: err.response.data.message,
+                    content: err.response.data.log,
+                });
+            });
+    };
+
+    const addPostToCategory = async (values) => {
         await devtryBlogApi
             .addPost(values)
             .then((res) => {
@@ -229,28 +222,7 @@ const CreatePost = () => {
                                     ))}
                                 </Select>
                             </Form.Item>
-                            {/* <Form.Item name="parent_id" label="Parent Post">
-                                <Row>
-                                    <Col span={18}>
-                                        <Select
-                                            mode="multiple"
-                                            allowClear
-                                            options={parentPosts}
-                                            onChange={handleParentPostChange}
-                                            // onSearch={handleSearch}
-                                            // onSelect={(value) => {
-                                            //     console.log(value);
-                                            // }}
-                                            placeholder="Select a parent post"
-                                        />
-                                    </Col>
-                                    <Col span={6}>
-                                        <Button onClick={handleSearch} icon={<SearchOutlined />}>
-                                            Search
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Form.Item> */}
+
                             <Form.Item name="tags" label="Tags">
                                 <Select
                                     mode="tags"
@@ -259,7 +231,8 @@ const CreatePost = () => {
                                     }}
                                     onChange={handleChange}
                                     tokenSeparators={[',']}
-                                    options={options}
+                                    fieldNames={{ label: 'title', value: 'slug' }}
+                                    options={tags}
                                 />
                             </Form.Item>
                         </Panel>

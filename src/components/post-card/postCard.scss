@@ -10,10 +10,18 @@
 
     &__image {
         padding: 0 15px;
-
         img {
             max-width: 100%;
-            height: auto;
+            max-height: 200px;
+            object-fit: scale-down;
+        }
+        div {
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 100%;
+            min-height: 150px;
+            position: absolute;
+            background-position: center;
         }
 
         // @include mobile {

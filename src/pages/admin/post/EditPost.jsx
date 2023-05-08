@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Col, Form, Input, Row, Select, Collapse, Modal } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-
+import { Button, Col, Form, Input, Row, Select, Collapse, Modal, Spin } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import Editor from '../../../components/editor/Editor';
 import UploadImage from '../../../components/upload-image/UploadImage';
 import generateSlug from '../../../utils/generate-slug';
@@ -42,6 +41,7 @@ const tailFormItemLayout = {
 };
 
 const EditPost = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [form] = Form.useForm();
 
@@ -51,6 +51,9 @@ const EditPost = () => {
     const [thumbnail, setThumbnail] = useState(null);
     const [tags, setTags] = useState([]);
     const [deletedTags, setDeletedTags] = useState([]);
+
+    const [loading, setLoading] = useState(true);
+
     const filterTagsExist = (allTags, existTags) => {
         let result = [];
         allTags.forEach((item) => {
@@ -64,6 +67,7 @@ const EditPost = () => {
 
     useEffect(() => {
         const getPostDetail = async () => {
+            setLoading(true);
             devtryBlogApi
                 .getPost(id)
                 .then((res) => {
@@ -78,9 +82,11 @@ const EditPost = () => {
                     setContent(res.data.content);
                     setThumbnail(res.data.thumbnail);
                     setTags(res.data.tags);
+                    setLoading(false);
                 })
                 .catch((err) => {
                     console.log(err);
+                    setLoading(false);
                 });
         };
         getPostDetail();
@@ -114,6 +120,7 @@ const EditPost = () => {
                     form.setFieldsValue({
                         tags: filterTagsExist(res.data, tags),
                     });
+                    setTags(res.data);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -121,13 +128,20 @@ const EditPost = () => {
         };
 
         getTags();
-    }, [tags]);
+    }, []);
 
     const update = async (values) => {
         await devtryBlogApi
             .updatePost(id, values)
             .then((res) => {
-                console.log(res);
+                Modal.success({
+                    title: 'Update post successfully',
+                    content: res.data,
+                });
+
+                setTimeout(() => {
+                    navigate('/admin/list-post');
+                }, 2000);
             })
             .catch((err) => {
                 console.log(err.response.data);
@@ -143,7 +157,7 @@ const EditPost = () => {
         values.thumbnail = thumbnail;
         console.log('Received values of form: ', values);
         console.log(deletedTags);
-        // update(values);
+        update(values);
     };
 
     const onContentChange = (e) => {
@@ -170,127 +184,118 @@ const EditPost = () => {
     };
 
     return (
-        <Form
-            {...formItemLayout}
-            form={form}
-            name="register"
-            onFinish={onFinish}
-            style={{
-                maxWidth: '100%',
-            }}
-            scrollToFirstError
-        >
-            <Row gutter={16}>
-                <Col xl={16} lg={24} md={24} sm={24} xs={24}>
-                    <Form.Item
-                        name="title"
-                        label="Title"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input Title!',
-                            },
-                        ]}
-                    >
-                        <Input.TextArea onChange={handleTitleChange} showCount maxLength={75} />
-                    </Form.Item>
-                    <Form.Item name="meta_title" label="Meta Title">
-                        <Input.TextArea showCount maxLength={100} />
-                    </Form.Item>
-
-                    <Form.Item name="content" label="Content">
-                        <Editor data={content} onContentChange={onContentChange} />
-                    </Form.Item>
-                </Col>
-                <Col xl={8} lg={24} md={24} sm={24} xs={24}>
-                    <Collapse size="small" defaultActiveKey={['1']}>
-                        <Panel header="Options" key={1}>
-                            <Form.Item name="thumbnail" label="Thumbnail">
-                                <UploadImage
-                                    defaultImage={thumbnail}
-                                    onSuccess={onUploadImageChange}
-                                />
-                            </Form.Item>
+        <>
+            {loading ? (
+                <Spin style={{ marginTop: '2rem' }} tip="Loading">
+                    <div className="content" />
+                </Spin>
+            ) : (
+                <Form
+                    {...formItemLayout}
+                    form={form}
+                    name="register"
+                    onFinish={onFinish}
+                    style={{
+                        maxWidth: '100%',
+                    }}
+                    scrollToFirstError
+                >
+                    <Row gutter={16}>
+                        <Col xl={16} lg={24} md={24} sm={24} xs={24}>
                             <Form.Item
-                                name="slug"
-                                label="Slug"
+                                name="title"
+                                label="Title"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please input Slug!',
+                                        message: 'Please input Title!',
                                     },
                                 ]}
                             >
+                                <Input.TextArea
+                                    onChange={handleTitleChange}
+                                    showCount
+                                    maxLength={75}
+                                />
+                            </Form.Item>
+                            <Form.Item name="meta_title" label="Meta Title">
                                 <Input.TextArea showCount maxLength={100} />
                             </Form.Item>
-                            <Form.Item name="sumary" label="Sumary">
-                                <Input.TextArea />
-                            </Form.Item>
-                            <Form.Item
-                                name="category"
-                                label="Cagetory"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please select category!',
-                                        type: 'array',
-                                    },
-                                ]}
-                            >
-                                <Select mode="multiple" placeholder="select your category">
-                                    {categories.map((category) => (
-                                        <Option key={category.id} value={category.id}>
-                                            {category.title}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                            {/* <Form.Item name="parent_id" label="Parent Post">
-                                <Row>
-                                    <Col span={18}>
-                                        <Select
-                                            mode="multiple"
-                                            allowClear
-                                            options={parentPosts}
-                                            onChange={handleParentPostChange}
-                                            // onSearch={handleSearch}
-                                            // onSelect={(value) => {
-                                            //     console.log(value);
-                                            // }}
-                                            placeholder="Select a parent post"
-                                        />
-                                    </Col>
-                                    <Col span={6}>
-                                        <Button onClick={handleSearch} icon={<SearchOutlined />}>
-                                            Search
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Form.Item> */}
-                            <Form.Item name="tags" label="Tags">
-                                <Select
-                                    mode="tags"
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                    onChange={handleTagsChange}
-                                    tokenSeparators={[',']}
-                                    options={tags}
-                                    fieldNames={{ label: 'title', value: 'slug' }}
-                                    onDeselect={(value) => handleDeselectTags(value)}
-                                />
-                            </Form.Item>
-                        </Panel>
-                    </Collapse>
 
-                    <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">
-                            Add post
-                        </Button>
-                    </Form.Item>
-                </Col>
-            </Row>
-        </Form>
+                            <Form.Item name="content" label="Content">
+                                <Editor data={content} onContentChange={onContentChange} />
+                            </Form.Item>
+                        </Col>
+                        <Col xl={8} lg={24} md={24} sm={24} xs={24}>
+                            <Collapse size="small" defaultActiveKey={['1']}>
+                                <Panel header="Options" key={1}>
+                                    <Form.Item name="thumbnail" label="Thumbnail">
+                                        <UploadImage
+                                            defaultImage={thumbnail}
+                                            onSuccess={onUploadImageChange}
+                                        />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="slug"
+                                        label="Slug"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please input Slug!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input.TextArea showCount maxLength={100} />
+                                    </Form.Item>
+                                    <Form.Item name="sumary" label="Sumary">
+                                        <Input.TextArea />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="category"
+                                        label="Cagetory"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please select category!',
+                                                type: 'array',
+                                            },
+                                        ]}
+                                    >
+                                        <Select mode="multiple" placeholder="select your category">
+                                            {categories.map((category) => (
+                                                <Option key={category.id} value={category.id}>
+                                                    {category.title}
+                                                </Option>
+                                            ))}
+                                        </Select>
+                                    </Form.Item>
+
+                                    <Form.Item name="tags" label="Tags">
+                                        <Select
+                                            mode="tags"
+                                            style={{
+                                                width: '100%',
+                                            }}
+                                            onChange={handleTagsChange}
+                                            tokenSeparators={[',']}
+                                            options={tags}
+                                            fieldNames={{ label: 'title', value: 'slug' }}
+                                            onDeselect={(value) => handleDeselectTags(value)}
+                                        />
+                                    </Form.Item>
+                                </Panel>
+                            </Collapse>
+
+                            <Form.Item {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit">
+                                    Update post
+                                </Button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            )}
+        </>
     );
 };
 export default EditPost;

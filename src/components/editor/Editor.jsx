@@ -1,7 +1,6 @@
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 import ImageResize from 'quill-image-resize-module-react';
-import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
 Quill.register('modules/imageUploader', ImageUploader);
@@ -26,10 +25,11 @@ const options = {
                     fetch('https://devtry.me/v1/upload', {
                         method: 'POST',
                         body: formData,
+                        headers: authHeader(),
                     })
                         .then((response) => response.json())
                         .then((result) => {
-                            console.log(result);
+                            // console.log(result);
                             resolve(result.data.url);
                         })
                         .catch((error) => {

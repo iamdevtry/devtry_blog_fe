@@ -21,7 +21,7 @@ const devtryBlogApi = {
             page = 1;
         }
         if (limit === undefined) {
-            limit = 10;
+            limit = 9;
         }
         const url = `/posts?page=${page}&limit=${limit}`;
         return axiosClient.get(url);

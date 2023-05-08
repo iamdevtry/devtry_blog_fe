@@ -40,7 +40,7 @@ const Post = () => {
                 .getPostBySlug(slug)
                 .then((res) => {
                     setData(res.data);
-                    // console.log(res.data);
+                    console.log(res.data);
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -146,7 +146,7 @@ const Post = () => {
                                 </Col>
                             )}
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <WidgetList
                                 vertical={true}
                                 widgets={[
@@ -164,7 +164,7 @@ const Post = () => {
                                     },
                                 ]}
                             />
-                        </Row>
+                        </Row> */}
                         <Row></Row>
                     </>
                 )}

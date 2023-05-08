@@ -7,13 +7,13 @@ export const headerNav = [
     //     display: 'Blog',
     //     path: '/blog',
     // },
-    {
-        title: 'Categories',
-        slug: '#',
-        chilldren: localStorage.getItem('categories')
-            ? JSON.parse(localStorage.getItem('categories'))
-            : [],
-    },
+    // {
+    //     title: 'Categories',
+    //     slug: '#',
+    //     chilldren: localStorage.getItem('categories')
+    //         ? JSON.parse(localStorage.getItem('categories'))
+    //         : [],
+    // },
     {
         title: 'About me',
         slug: '/about',

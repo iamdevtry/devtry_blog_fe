@@ -73,33 +73,12 @@ const CreateCategory = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
 
-    // const [parentPosts, setParentPosts] = useState([]);
-    // const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-    // const onParentPostChange = (value) => {
-    //     if (!value) {
-    //         setAutoCompleteResult([]);
-    //     } else {
-    //         const postParents = parentPosts.filter((post) => post.label.includes(value));
-    //         setAutoCompleteResult(postParents.map((post) => `${post.label}`));
-    //     }
-    // };
-    // const parentPostOptions = autoCompleteResult.map((post) => ({
-    //     label: post,
-    //     value: post,
-    // }));
-
-    // const handleSearch = (value) => {
-    //     console.log(value);
-    //     setParentPosts(parentPostExample);
-    // };
-
     useEffect(() => {
         const getCategories = async () => {
             devtryBlogApi
                 .getCategories()
                 .then((res) => {
-                    console.log('call api');
+                    // console.log('call api');
                     setCategories(res.data);
                     localStorage.setItem('categories', JSON.stringify(res.data));
                 })
@@ -120,7 +99,7 @@ const CreateCategory = () => {
         await devtryBlogApi
             .addCategory(values)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 Modal.success({
                     title: 'Add category successfully',
                     content: res.data,

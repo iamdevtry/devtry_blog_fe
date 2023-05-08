@@ -3,18 +3,16 @@ import axios from 'axios';
 import Upload from 'rc-upload';
 import { Image, Button, Typography, Spin } from 'antd';
 import { DeleteOutlined, PlusCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-
+import authHeader from '../../services/authHeader';
 import './upload-image.scss';
 
 const { Text } = Typography;
 
 const uploadProps = {
-    action: 'https://devtry.me/v1/upload',
+    action: 'http://devtry.me/v1/upload',
     multiple: false,
     data: { a: 1, b: 2 },
-    headers: {
-        // Authorization: '$prefix $token',
-    },
+    headers: authHeader(),
     onStart(file) {
         console.log('onStart', file, file.name);
     },

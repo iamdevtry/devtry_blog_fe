@@ -12,7 +12,12 @@ const PostCard = ({ post }) => {
     return (
         <Row className="post-card">
             <Col lg={8} md={8} xs={0} className="post-card__image">
-                <img src={`${post.thumbnail ? post.thumbnail.url : noImage}`} alt="post" />
+                {/* <img src={`${post.thumbnail ? post.thumbnail.url : noImage}`} alt="post" /> */}
+                <div
+                    style={{
+                        backgroundImage: `url(${post.thumbnail ? post.thumbnail.url : noImage})`,
+                    }}
+                ></div>
             </Col>
             <Col lg={16} md={16} xs={24} className="post-card__content">
                 <h3 className="post-card__title">
@@ -36,12 +41,12 @@ const PostCard = ({ post }) => {
                         ))}
                     </span>
                     <div className="post-card__actions">
-                        {/* <span className="post-card__comment">
+                        <span className="post-card__comment">
                             <FaRegComments /> 2 comments
                         </span>
                         <span className="post-card__like">
                             <BiLike /> 2 likes
-                        </span> */}
+                        </span>
                     </div>
                 </div>
             </Col>
