@@ -145,6 +145,7 @@ const CreatePost = () => {
     };
 
     const onContentChange = (e) => {
+        console.log(e);
         setContent(e);
     };
 

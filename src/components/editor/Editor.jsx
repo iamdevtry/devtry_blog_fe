@@ -1,7 +1,7 @@
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 import ImageResize from 'quill-image-resize-module-react';
-
+import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
 Quill.register('modules/imageUploader', ImageUploader);
@@ -23,7 +23,7 @@ const options = {
                     const formData = new FormData();
                     formData.append('file', file);
 
-                    fetch('http://localhost:8080/v1/upload', {
+                    fetch('https://devtry.me/v1/upload', {
                         method: 'POST',
                         body: formData,
                     })
@@ -64,7 +64,11 @@ const options = {
 const Editor = ({ onContentChange, data }) => {
     return (
         <div className="text-editor">
-            <ReactQuill value={data} {...options} onChange={onContentChange}></ReactQuill>
+            <ReactQuill
+                {...options}
+                defaultValue={data}
+                onChange={(value) => onContentChange(value)}
+            ></ReactQuill>
         </div>
     );
 };
