@@ -57,6 +57,7 @@ const CreatePost = () => {
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [content, setContent] = useState(null);
+    const [thumbnail, setThumbnail] = useState(null);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -133,6 +134,7 @@ const CreatePost = () => {
 
     const onFinish = (values) => {
         values.content = content;
+        values.thumbnail = thumbnail;
         // console.log('Received values of form: ', values);
         addPost(values);
     };
@@ -149,6 +151,9 @@ const CreatePost = () => {
         });
     };
 
+    const onUploadImageChange = (e) => {
+        setThumbnail(e);
+    };
     return (
         <Form
             {...formItemLayout}
@@ -186,7 +191,7 @@ const CreatePost = () => {
                     <Collapse size="small" defaultActiveKey={['1']}>
                         <Panel header="Options" key={1}>
                             <Form.Item name="thumbnail" label="Thumbnail">
-                                <UploadImage />
+                                <UploadImage onSuccess={onUploadImageChange} />
                             </Form.Item>
                             <Form.Item
                                 name="slug"
