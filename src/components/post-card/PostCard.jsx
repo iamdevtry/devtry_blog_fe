@@ -16,11 +16,11 @@ const PostCard = ({ post }) => {
             </Col>
             <Col lg={16} md={16} xs={24} className="post-card__content">
                 <h3 className="post-card__title">
-                    <Link to={`/${post.slug}`}>{post.title}</Link>
+                    <Link to={`/post/${post.slug}`}>{post.title}</Link>
                 </h3>
                 <span>{post.created_at ? customTime(post.created_at) : 'unknown'}</span>
                 <br />
-                <span>Raymond Chen</span>
+                {/* <span>Raymond Chen</span> */}
                 <p className="post-card__description">{post.sumary}</p>
             </Col>
             <Divider dashed />
@@ -36,12 +36,12 @@ const PostCard = ({ post }) => {
                         ))}
                     </span>
                     <div className="post-card__actions">
-                        <span className="post-card__comment">
+                        {/* <span className="post-card__comment">
                             <FaRegComments /> 2 comments
                         </span>
                         <span className="post-card__like">
                             <BiLike /> 2 likes
-                        </span>
+                        </span> */}
                     </div>
                 </div>
             </Col>
