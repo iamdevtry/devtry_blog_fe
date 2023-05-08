@@ -140,12 +140,12 @@ const CreatePost = () => {
 
     const onFinish = (values) => {
         values.content = content;
-        console.log('Received values of form: ', values);
-        // addPost(values);
+        // console.log('Received values of form: ', values);
+        addPost(values);
     };
 
     const onContentChange = (e) => {
-        console.log(e);
+        // console.log(e);
         setContent(e);
     };
 
