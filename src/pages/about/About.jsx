@@ -11,6 +11,8 @@ import profileImage from '../../assets/images/profile_image.webp';
 import aboutImage1 from '../../assets/images/about_image_1.webp';
 import aboutImage2 from '../../assets/images/about_image_2.webp';
 
+import './about.scss';
+
 import { Helmet } from 'react-helmet';
 const About = () => {
     return (
@@ -105,7 +107,7 @@ const About = () => {
                         </Card>
                     </Col>
                     <Col lg={7} md={7} xs={24}>
-                        <Card hoverable cover={<img alt="devtry.net" src={profileImage} />}>
+                        <Card className='ant-card-cover__mobile' hoverable cover={<img alt="devtry.net" src={profileImage} />}>
                             <Descriptions title="Personal Info" column={1}>
                                 <Descriptions.Item label="Full name">
                                     Phong Binh Tran

@@ -6,6 +6,10 @@
     padding: 4% 0;
     max-height: 240px;
 
+    @include mobile {
+        margin-top: $header-height-mobile;
+    }
+
     &__container {
         display: flex;
         justify-content: space-between;

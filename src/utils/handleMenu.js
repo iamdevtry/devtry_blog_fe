@@ -1,8 +1,8 @@
 export const headerNav = [
-    {
-        title: 'Home',
-        slug: '/',
-    },
+    // {
+    //     title: 'Home',
+    //     slug: '/',
+    // },
     // {
     //     display: 'Blog',
     //     path: '/blog',

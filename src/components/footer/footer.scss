@@ -14,6 +14,10 @@
         font-size: $font-size-s;
         font-family: $font-family;
         text-align: center;
+
+        @include mobile {
+            padding: 1rem;
+        }
     }
 
     &__logo {
@@ -78,6 +82,10 @@
             height: 1.5rem;
             margin-right: 0.5rem;
             color: red;
+        }
+
+        @include mobile {
+            padding: 1rem;
         }
     }
 }

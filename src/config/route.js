@@ -26,8 +26,8 @@ const RouteConfig = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<MainLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path="home" element={<Home />} />
+                    <Route index element={<About />} />
+                    {/* <Route path="home" element={<Home />} /> */}
                     {/* <Route path="blog" element={<Blog />} /> */}
                     <Route path="categories/:slug" element={<Category />} />
                     <Route path="tags/:slug/:id" element={<Tag />} />

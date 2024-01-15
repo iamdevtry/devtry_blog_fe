@@ -1,0 +1,8 @@
+@use '../../scss/' as *;
+
+@include mobile {
+    .ant-card-cover__mobile .ant-card-cover{
+        padding: 0 24px;
+        padding-top: 24px;
+    }
+}
