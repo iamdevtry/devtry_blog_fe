@@ -17,10 +17,12 @@
 
         @include tablet {
             padding: 25px;
+            height: 168px;
         }
 
         @include mobile {
             padding: 0;
+            height: 150px;
         }
     }
 
