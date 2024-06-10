@@ -15,8 +15,12 @@
         font-family: $font-family;
         text-align: center;
 
+        @include tablet {
+            padding: 25px;
+        }
+
         @include mobile {
-            padding: 1rem;
+            padding: 0;
         }
     }
 
