@@ -35,7 +35,7 @@ const About = () => {
                     <Col lg={17} md={17} xs={24}>
                         <Card>
                             <Descriptions title="About blog">
-                                <Descriptions.Item>
+                                <Descriptions.Item className="about-content__text">
                                     Welcome to my blog, where I share my passion for technology and
                                     development. This blog is dedicated to providing useful
                                     resources, tips, and insights to help you navigate the
@@ -58,7 +58,7 @@ const About = () => {
                                 </Descriptions.Item>
                             </Descriptions>
                             <Descriptions title="About me">
-                                <Descriptions.Item>
+                                <Descriptions.Item className="about-content__text">
                                     My name is Phong. I'm a Vietnamese 🇻🇳. I recently graduated from
                                     Ho Chi Minh University of Technology with a degree in System
                                     analysis and design. I am passionate about backend development
@@ -73,7 +73,7 @@ const About = () => {
                                 </Descriptions.Item>
                             </Descriptions>
                             <Descriptions title="Hobbies and  I don't know what I'm talking about">
-                                <Descriptions.Item>
+                                <Descriptions.Item className="about-content__text">
                                     I’m glad you took the time to read this part. By the way, you
                                     can understand a little more about my preferences. I like
                                     learning new technology and programming languages in my free
