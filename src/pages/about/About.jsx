@@ -15,6 +15,11 @@ import './about.scss';
 
 import { Helmet } from 'react-helmet';
 const About = () => {
+    const calculateAge = () => {
+        const birthDate = new Date('2001-03-03');
+        const currentDate = new Date();
+        return currentDate.getFullYear() - birthDate.getFullYear();
+    };
     return (
         <div className="about">
             <Helmet>
@@ -112,10 +117,10 @@ const About = () => {
                                 <Descriptions.Item label="Full name">
                                     Phong Binh Tran
                                 </Descriptions.Item>
-                                <Descriptions.Item label="Age">22 </Descriptions.Item>
+                                <Descriptions.Item label="Age">{calculateAge()} </Descriptions.Item>
                                 <Descriptions.Item label="Country">🇻🇳 Vietnam</Descriptions.Item>
                                 <Descriptions.Item label="Role">
-                                    Software engineer
+                                    Full-stack Developer
                                 </Descriptions.Item>
                             </Descriptions>
                             <div>
